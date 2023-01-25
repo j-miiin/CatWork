@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
@@ -42,5 +43,19 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
 
     override fun hideLoadingIndicator() {
         binding?.progressBar?.toGone()
+    }
+
+    override fun showErrorDescription(message: String) {
+        binding?.errorDescriptionTextView?.toVisible()
+    }
+
+    override fun showToDoList() {
+
+    }
+
+    private fun initViews() {
+        binding?.recyclerView?.apply {
+            adapter = HomeAdapter()
+        }
     }
 }
