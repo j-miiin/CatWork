@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
+import com.example.catwork.domain.model.ToDoItem
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
 import org.koin.android.ext.android.inject
@@ -46,15 +49,28 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
     }
 
     override fun showErrorDescription() {
+        binding?.recyclerView?.toGone()
         binding?.errorDescriptionTextView?.toVisible()
     }
 
-    override fun showToDoList() {
-
+    override fun showToDoList(toDoList: List<ToDoItem>) {
+        binding?.recyclerView?.toVisible()
+        binding?.errorDescriptionTextView?.toGone()
+        (binding?.recyclerView?.adapter as? HomeAdapter)?.run {
+            setToDoList(toDoList,
+                toDoItemClickListener = {
+                    //TODO Update 화면으로 이동 -> 기능 좀 더 고민
+                },
+                toDoItemCheckListener = {
+                    // TODO Check 값 Update
+                })
+            notifyDataSetChanged()
+        }
     }
 
     private fun initViews() {
         binding?.recyclerView?.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = HomeAdapter()
         }
     }

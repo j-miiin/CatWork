@@ -17,6 +17,8 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
         val toDoItemClickListener: (ToDoItem) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        // TODO init이랑 bind 수정하기
+
         fun bindData(data: ToDoItem) = with(binding) {
             checkBox.text = data.content
             checkToDoComplete(data.isChecked)
