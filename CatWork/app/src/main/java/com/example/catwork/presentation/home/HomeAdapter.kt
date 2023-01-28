@@ -8,14 +8,18 @@ import com.example.catwork.domain.model.ToDoItem
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
-    private var toDoList: List<ToDoItem> = listOf()
-    private lateinit var toDoItemClickListener: (ToDoItem) -> Unit
-    private lateinit var toDoItemCheckListener: (ToDoItem) -> Unit
+    var toDoList: List<ToDoItem> = listOf()
+    var toDoItemClickListener: ((ToDoItem) -> Unit)? = null
+    var toDoItemCheckListener: ((ToDoItem) -> Unit)? = null
 
     inner class ToDoItemViewHolder(
         private val binding: ViewholderItemTodoBinding,
         val toDoItemClickListener: (ToDoItem) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+
+        }
 
         // TODO init이랑 bind 수정하기
 
