@@ -23,22 +23,26 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
         // TODO init이랑 bind 수정하기
 
-        fun bindData(data: ToDoItem) = with(binding) {
-            checkBox.text = data.content
-            checkToDoComplete(data.isChecked)
+        fun bind() {
+
         }
 
-        fun bindViews(data: ToDoItem) {
-            binding.checkBox.setOnClickListener {
-                toDoItemCheckListener(
-                    data.copy(isChecked = binding.checkBox.isChecked)
-                )
-                checkToDoComplete(binding.checkBox.isChecked)
-            }
-            binding.root.setOnClickListener {
-                toDoItemClickListener(data)
-            }
-        }
+//        fun bindData(data: ToDoItem) = with(binding) {
+//            checkBox.text = data.content
+//            checkToDoComplete(data.isChecked)
+//        }
+//
+//        fun bindViews(data: ToDoItem) {
+//            binding.checkBox.setOnClickListener {
+//                toDoItemCheckListener(
+//                    data.copy(isChecked = binding.checkBox.isChecked)
+//                )
+//                checkToDoComplete(binding.checkBox.isChecked)
+//            }
+//            binding.root.setOnClickListener {
+//                toDoItemClickListener(data)
+//            }
+//        }
 
         private fun checkToDoComplete(isChecked: Boolean) = with(binding) {
             checkBox.isChecked = isChecked
