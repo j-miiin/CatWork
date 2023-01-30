@@ -23,7 +23,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
         // TODO init이랑 bind 수정하기
 
-        fun bind() {
+        fun bind(todoItem: ToDoItem) {
 
         }
 
