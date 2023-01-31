@@ -9,40 +9,30 @@ import com.example.catwork.domain.model.ToDoItem
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
     var toDoList: List<ToDoItem> = listOf()
-    var toDoItemClickListener: ((ToDoItem) -> Unit)? = null
-    var toDoItemCheckListener: ((ToDoItem) -> Unit)? = null
+    lateinit var toDoItemClickListener: (ToDoItem) -> Unit
+    lateinit var toDoItemCheckListener: (ToDoItem) -> Unit
 
     inner class ToDoItemViewHolder(
         private val binding: ViewholderItemTodoBinding,
         val toDoItemClickListener: (ToDoItem) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        init {
-
+        fun bindData(data: ToDoItem) = with(binding) {
+            checkBox.text = data.content
+            checkToDoComplete(data.isChecked)
         }
 
-        // TODO init이랑 bind 수정하기
-
-        fun bind(todoItem: ToDoItem) {
-
+        fun bindViews(data: ToDoItem) {
+            binding.checkBox.setOnClickListener {
+                toDoItemCheckListener(
+                    data.copy(isChecked = binding.checkBox.isChecked)
+                )
+                checkToDoComplete(binding.checkBox.isChecked)
+            }
+            binding.root.setOnClickListener {
+                toDoItemClickListener(data)
+            }
         }
-
-//        fun bindData(data: ToDoItem) = with(binding) {
-//            checkBox.text = data.content
-//            checkToDoComplete(data.isChecked)
-//        }
-//
-//        fun bindViews(data: ToDoItem) {
-//            binding.checkBox.setOnClickListener {
-//                toDoItemCheckListener(
-//                    data.copy(isChecked = binding.checkBox.isChecked)
-//                )
-//                checkToDoComplete(binding.checkBox.isChecked)
-//            }
-//            binding.root.setOnClickListener {
-//                toDoItemClickListener(data)
-//            }
-//        }
 
         private fun checkToDoComplete(isChecked: Boolean) = with(binding) {
             checkBox.isChecked = isChecked

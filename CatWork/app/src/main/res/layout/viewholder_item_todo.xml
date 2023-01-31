@@ -3,20 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/todo_item_background">
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
         android:padding="10dp"
+        android:textColor="@color/primaryTextColor"
         android:textSize="20sp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteToDoItemButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="고양이 밥 주기" />
+
+    <Button
+        android:id="@+id/deleteToDoItemButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/ic_baseline_delete_24"
+        android:backgroundTint="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="@id/checkBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/checkBox"
+        app:layout_constraintTop_toTopOf="@id/checkBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

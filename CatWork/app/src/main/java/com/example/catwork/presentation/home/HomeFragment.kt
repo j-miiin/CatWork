@@ -48,9 +48,10 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         binding?.progressBar?.toGone()
     }
 
-    override fun showErrorDescription() {
+    override fun showErrorDescription(message: String) {
         binding?.recyclerView?.toGone()
         binding?.errorDescriptionTextView?.toVisible()
+        binding?.errorDescriptionTextView?.text = message
     }
 
     override fun showToDoList(toDoList: List<ToDoItem>) {

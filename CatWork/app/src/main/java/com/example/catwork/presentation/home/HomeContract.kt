@@ -12,7 +12,7 @@ interface HomeContract {
 
         fun hideLoadingIndicator()
 
-        fun showErrorDescription()
+        fun showErrorDescription(message: String)
 
         fun showToDoList(toDoList: List<ToDoItem>)
     }

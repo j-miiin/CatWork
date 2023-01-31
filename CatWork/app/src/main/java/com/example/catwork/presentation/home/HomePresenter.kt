@@ -1,5 +1,6 @@
 package com.example.catwork.presentation.home
 
+import com.example.catwork.R
 import com.example.catwork.domain.usecase.GetToDoListUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -25,7 +26,7 @@ class HomePresenter(
             view.showToDoList(toDoList)
         } catch (e: Exception) {
             e.printStackTrace()
-            view.showErrorDescription()
+            view.showErrorDescription(R.string.error_description.toString())
         } finally {
             view.hideLoadingIndicator()
         }
