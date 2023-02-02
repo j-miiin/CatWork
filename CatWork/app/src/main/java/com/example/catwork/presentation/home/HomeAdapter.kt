@@ -4,25 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.ViewholderItemTodoBinding
-import com.example.catwork.domain.model.ToDoItem
+import com.example.catwork.data.entity.ToDoEntity
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
-    var toDoList: List<ToDoItem> = listOf()
-    lateinit var toDoItemClickListener: (ToDoItem) -> Unit
-    lateinit var toDoItemCheckListener: (ToDoItem) -> Unit
+    var toDoList: List<ToDoEntity> = listOf()
+    lateinit var toDoItemClickListener: (ToDoEntity) -> Unit
+    lateinit var toDoItemCheckListener: (ToDoEntity) -> Unit
 
     inner class ToDoItemViewHolder(
-        private val binding: ViewholderItemTodoBinding,
-        val toDoItemClickListener: (ToDoItem) -> Unit
+        private val binding: ViewholderItemTodoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: ToDoItem) = with(binding) {
-            checkBox.text = data.content
-            checkToDoComplete(data.isChecked)
+        fun bindData(data: ToDoEntity) = with(binding) {
+            checkBox.text = data.title
+            checkBox.isChecked = data.isChecked
         }
 
-        fun bindViews(data: ToDoItem) {
+        fun bindViews(data: ToDoEntity) {
             binding.checkBox.setOnClickListener {
                 toDoItemCheckListener(
                     data.copy(isChecked = binding.checkBox.isChecked)
@@ -41,7 +40,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ToDoItemViewHolder {
         val view = ViewholderItemTodoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ToDoItemViewHolder(view, toDoItemClickListener)
+        return ToDoItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: HomeAdapter.ToDoItemViewHolder, position: Int) {
@@ -52,9 +51,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
     override fun getItemCount(): Int = toDoList.size
 
     fun setToDoList(
-        toDoList: List<ToDoItem>,
-        toDoItemClickListener: (ToDoItem) -> Unit,
-        toDoItemCheckListener: (ToDoItem) -> Unit
+        toDoList: List<ToDoEntity>,
+        toDoItemClickListener: (ToDoEntity) -> Unit,
+        toDoItemCheckListener: (ToDoEntity) -> Unit
     ) {
         this.toDoList = toDoList
         this.toDoItemClickListener = toDoItemClickListener

@@ -1,14 +1,14 @@
 package com.example.catwork.data.repository
 
-import com.example.catwork.domain.model.ToDoItem
+import com.example.catwork.data.entity.ToDoEntity
 
 interface ToDoItemRepository {
 
-    suspend fun getToDoList(): List<ToDoItem>
+    suspend fun getToDoList(): List<ToDoEntity>
 
-    suspend fun addToDoItem(toDoItem: ToDoItem)
-
-    suspend fun updateToDoItem(toDoItem: ToDoItem)
-
-    suspend fun removeToDoItem(toDoItem: ToDoItem)
+//    suspend fun addToDoItem(toDoItem: ToDoEntity)
+//
+//    suspend fun updateToDoItem(toDoItem: ToDoEntity)
+//
+//    suspend fun removeToDoItem(toDoItem: ToDoEntity)
 }

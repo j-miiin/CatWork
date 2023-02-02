@@ -1,6 +1,6 @@
 package com.example.catwork.presentation.home
 
-import com.example.catwork.domain.model.ToDoItem
+import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.presentation.BasePresenter
 import com.example.catwork.presentation.BaseView
 
@@ -14,7 +14,7 @@ interface HomeContract {
 
         fun showErrorDescription(message: String)
 
-        fun showToDoList(toDoList: List<ToDoItem>)
+        fun showToDoList(toDoList: List<ToDoEntity>)
     }
 
     interface Presenter : BasePresenter

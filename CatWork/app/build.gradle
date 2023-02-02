@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-//    id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -61,7 +61,8 @@ dependencies {
     implementation "io.insert-koin:koin-core:3.3.2"
     implementation "io.insert-koin:koin-android:3.3.2"
 
-    // Firebase
-//    implementation platform('com.google.firebase:firebase-bom:31.1.1')
-//    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
+    // Room Library
+    implementation 'androidx.room:room-runtime:2.4.3'
+    kapt 'androidx.room:room-compiler:2.4.3'
+    implementation 'androidx.room:room-ktx:2.4.3'
 }

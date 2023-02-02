@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
-import com.example.catwork.domain.model.ToDoItem
+import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
 import org.koin.android.ext.android.inject
@@ -54,7 +53,7 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         binding?.errorDescriptionTextView?.text = message
     }
 
-    override fun showToDoList(toDoList: List<ToDoItem>) {
+    override fun showToDoList(toDoList: List<ToDoEntity>) {
         binding?.recyclerView?.toVisible()
         binding?.errorDescriptionTextView?.toGone()
         (binding?.recyclerView?.adapter as? HomeAdapter)?.run {

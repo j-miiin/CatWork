@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="7dp"
     android:background="@drawable/todo_item_background">
 
     <CheckBox
@@ -31,6 +31,8 @@
         app:layout_constraintBottom_toBottomOf="@id/checkBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/checkBox"
-        app:layout_constraintTop_toTopOf="@id/checkBox" />
+        app:layout_constraintTop_toTopOf="@id/checkBox"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
