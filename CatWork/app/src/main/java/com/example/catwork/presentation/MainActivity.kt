@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.catwork.R
 import com.example.catwork.databinding.ActivityMainBinding
+import com.example.catwork.ext.getRandomID
 
 class MainActivity : AppCompatActivity() {
 

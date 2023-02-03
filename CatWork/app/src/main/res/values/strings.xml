@@ -4,4 +4,9 @@
     <string name="title_mypage">MyPage</string>
     <string name="title_notifications">Notifications</string>
     <string name="error_description">오류가 발생했어요!</string>
+    <string name="add_todo">추가</string>
+    <string name="cancel">취소</string>
+    <string name="todo_content_hint">설명을 입력해주세요!</string>
+    <string name="todo_title_hint">할 일</string>
+    <string name="alarm_checkbox">알람 설정</string>
 </resources>

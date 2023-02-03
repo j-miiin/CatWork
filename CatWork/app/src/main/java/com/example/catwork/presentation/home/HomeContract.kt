@@ -17,5 +17,10 @@ interface HomeContract {
         fun showToDoList(toDoList: List<ToDoEntity>)
     }
 
-    interface Presenter : BasePresenter
+    interface Presenter : BasePresenter {
+
+        fun fetchToDoList()
+
+        fun addToDo(toDoEntity: ToDoEntity)
+    }
 }
