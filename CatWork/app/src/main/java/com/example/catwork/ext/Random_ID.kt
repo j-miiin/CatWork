@@ -7,4 +7,5 @@ fun getRandomID(): String {
     return (1..10)
         .map { charset.random() }
         .joinToString("")
+        + System.currentTimeMillis()
 }

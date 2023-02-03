@@ -35,6 +35,19 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         presenter.onViewCreated()
     }
 
+    private fun initViews() {
+        binding?.recyclerView?.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = HomeAdapter()
+        }
+
+        binding?.addToDoItemButton?.setOnClickListener {
+            AddToDoDialog(requireContext()) {
+                presenter.addToDo(it)
+            }.show()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDestroy()
@@ -66,19 +79,6 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
                     // TODO Check 값 Update
                 })
             notifyDataSetChanged()
-        }
-    }
-
-    private fun initViews() {
-        binding?.recyclerView?.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = HomeAdapter()
-        }
-
-        binding?.addToDoItemButton?.setOnClickListener {
-            AddToDoDialog(requireContext()) {
-                presenter.addToDo(it)
-            }.show()
         }
     }
 }
