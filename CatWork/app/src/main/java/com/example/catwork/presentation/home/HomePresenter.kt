@@ -2,6 +2,7 @@ package com.example.catwork.presentation.home
 
 import com.example.catwork.R
 import com.example.catwork.data.entity.ToDoEntity
+import com.example.catwork.domain.usecase.AddToDoUseCase
 import com.example.catwork.domain.usecase.GetToDoListUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -10,7 +11,8 @@ import java.util.*
 
 class HomePresenter(
     private val view: HomeContract.View,
-    private val getToDoListUseCase: GetToDoListUseCase
+    private val getToDoListUseCase: GetToDoListUseCase,
+    private val addToDoUseCase: AddToDoUseCase
 ) : HomeContract.Presenter {
 
     override val scope: CoroutineScope = MainScope()
@@ -41,7 +43,10 @@ class HomePresenter(
     }
 
     override fun addToDo(toDoEntity: ToDoEntity) {
-
+        scope.launch {
+            addToDoUseCase(toDoEntity)
+        }
+        fetchToDoList()
     }
 }
 

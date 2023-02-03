@@ -6,8 +6,8 @@ interface ToDoItemRepository {
 
     suspend fun getToDoList(): List<ToDoEntity>
 
-//    suspend fun addToDoItem(toDoItem: ToDoEntity)
-//
+    suspend fun addToDoItem(toDoEntity: ToDoEntity)
+
 //    suspend fun updateToDoItem(toDoItem: ToDoEntity)
 //
 //    suspend fun removeToDoItem(toDoItem: ToDoEntity)
