@@ -48,6 +48,10 @@ class HomePresenter(
         }
         fetchToDoList()
     }
+
+    override fun updateToDoEntity(toDoEntity: ToDoEntity) {
+        updateToDoUseCase(toDoEntity)
+    }
 }
 
 //            val toDoList = listOf(

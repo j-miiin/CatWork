@@ -22,5 +22,7 @@ interface HomeContract {
         fun fetchToDoList()
 
         fun addToDo(toDoEntity: ToDoEntity)
+
+        fun updateToDoEntity(toDoEntity: ToDoEntity)
     }
 }
