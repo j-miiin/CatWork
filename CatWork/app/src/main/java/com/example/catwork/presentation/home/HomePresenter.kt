@@ -45,8 +45,8 @@ class HomePresenter(
     override fun addToDo(toDoEntity: ToDoEntity) {
         scope.launch {
             addToDoUseCase(toDoEntity)
+            fetchToDoList()
         }
-        fetchToDoList()
     }
 
     override fun updateToDoEntity(toDoEntity: ToDoEntity) {
