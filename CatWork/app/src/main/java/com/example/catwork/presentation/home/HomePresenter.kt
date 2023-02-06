@@ -50,100 +50,52 @@ class HomePresenter(
     }
 
     override fun updateToDoEntity(toDoEntity: ToDoEntity) {
-        updateToDoUseCase(toDoEntity)
+//        updateToDoUseCase(toDoEntity)
     }
 }
 
-//            val toDoList = listOf(
-//                ToDoEntity(
-//                    id = "1",
-//                    title = "고양이랑 놀기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "2",
-//                    title = "청소하기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "3",
-//                    title = "숨쉬기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "4",
-//                    title = "밥먹기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "5",
-//                    title = "아무것도 안하기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "6",
-//                    title = "유투브 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "7",
-//                    title = "트위치 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "8",
-//                    title = "넷플릭스 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "9",
-//                    title = "넷플릭스 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "10",
-//                    title = "넷플릭스 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "11",
-//                    title = "넷플릭스 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "12",
-//                    title = "넷플릭스 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//                ToDoEntity(
-//                    id = "13",
-//                    title = "넷플릭스 보기",
-//                    content = "재밌겠다",
-//                    isChecked = false,
-//                    dueTo = Date()
-//                ),
-//            )
+//val toDoList = listOf(
+//    ToDoEntity(
+//        id = "1",
+//        title = "Wavve 인턴 지원하기",
+//        content = "재밌겠다",
+//        isChecked = false,
+//        dueTo = Date()
+//    ),
+//    ToDoEntity(
+//        id = "2",
+//        title = "청소하기",
+//        content = "재밌겠다",
+//        isChecked = false,
+//        dueTo = Date()
+//    ),
+//    ToDoEntity(
+//        id = "3",
+//        title = "고양이랑 놀기",
+//        content = "재밌겠다",
+//        isChecked = false,
+//        dueTo = Date()
+//    ),
+//    ToDoEntity(
+//        id = "4",
+//        title = "알고리즘 문제 풀기",
+//        content = "재밌겠다",
+//        isChecked = false,
+//        dueTo = Date()
+//    ),
+//    ToDoEntity(
+//        id = "5",
+//        title = "CatWork 프로젝트 진행",
+//        content = "재밌겠다",
+//        isChecked = false,
+//        dueTo = Date()
+//    ),
+//    ToDoEntity(
+//        id = "6",
+//        title = "Wavve 보기",
+//        content = "재밌겠다",
+//        isChecked = false,
+//        dueTo = Date()
+//    ),
+//)
+

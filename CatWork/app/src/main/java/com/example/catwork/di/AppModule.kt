@@ -15,7 +15,7 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-//    single { Dispatchers.Main }
+    single { Dispatchers.Main }
     single { Dispatchers.IO }
 
     single { ToDoDatabase.build(androidApplication())}

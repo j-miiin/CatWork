@@ -2,6 +2,8 @@ package com.example.catwork.presentation.home.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
@@ -26,6 +28,7 @@ class AddToDoDialog(
     private fun initViews() = with(binding) {
         setCancelable(true)
 
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         addToDoButton.setOnClickListener {
             if (titleEditText.text.isNullOrBlank()) {
                 Toast.makeText(context, "할 일을 입력해주세요!", Toast.LENGTH_SHORT).show()

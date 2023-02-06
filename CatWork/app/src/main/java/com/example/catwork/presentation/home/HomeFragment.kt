@@ -77,7 +77,7 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
                 },
                 toDoItemCheckListener = {
                     // TODO Check 값 Update
-                    presenter.updateToDoEnttiy(it)
+//                    presenter.updateToDoEnttiy(it)
                 })
             notifyDataSetChanged()
         }
