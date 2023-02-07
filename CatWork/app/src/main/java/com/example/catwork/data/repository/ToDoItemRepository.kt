@@ -8,7 +8,7 @@ interface ToDoItemRepository {
 
     suspend fun addToDoItem(toDoEntity: ToDoEntity)
 
-//    suspend fun updateToDoItem(toDoItem: ToDoEntity)
-//
+    suspend fun updateToDoItem(toDoItem: ToDoEntity)
+
 //    suspend fun removeToDoItem(toDoItem: ToDoEntity)
 }

@@ -76,8 +76,7 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
                     //TODO Update 화면으로 이동 -> 기능 좀 더 고민
                 },
                 toDoItemCheckListener = {
-                    // TODO Check 값 Update
-//                    presenter.updateToDoEnttiy(it)
+                    presenter.updateToDoEntity(it)
                 })
             notifyDataSetChanged()
         }

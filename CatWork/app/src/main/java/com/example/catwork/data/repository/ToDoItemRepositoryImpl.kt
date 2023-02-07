@@ -17,10 +17,11 @@ class ToDoItemRepositoryImpl(
     override suspend fun addToDoItem(toDoEntity: ToDoEntity) = withContext(dispatcher) {
         toDoDao.insert(toDoEntity)
     }
-//
-//    override suspend fun updateToDoItem(toDoItem: ToDoEntity) {
-//    }
-//
+
+    override suspend fun updateToDoItem(toDoEntity: ToDoEntity) {
+        toDoDao.update(toDoEntity)
+    }
+
 //    override suspend fun removeToDoItem(toDoItem: ToDoEntity) {
 //    }
 

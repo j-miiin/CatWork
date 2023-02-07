@@ -6,6 +6,7 @@ import com.example.catwork.data.repository.ToDoItemRepository
 import com.example.catwork.data.repository.ToDoItemRepositoryImpl
 import com.example.catwork.domain.usecase.AddToDoUseCase
 import com.example.catwork.domain.usecase.GetToDoListUseCase
+import com.example.catwork.domain.usecase.UpdateToDoUseCase
 import com.example.catwork.presentation.home.HomeContract
 import com.example.catwork.presentation.home.HomeFragment
 import com.example.catwork.presentation.home.HomePresenter
@@ -27,9 +28,10 @@ val appModule = module {
     // UseCase
     factory { GetToDoListUseCase(get()) }
     factory { AddToDoUseCase(get()) }
+    factory { UpdateToDoUseCase(get()) }
 
     // Presentation
     scope<HomeFragment> {
-        scoped<HomeContract.Presenter> { HomePresenter(get(), get(), get()) }
+        scoped<HomeContract.Presenter> { HomePresenter(get(), get(), get(), get()) }
     }
 }

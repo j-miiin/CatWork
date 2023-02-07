@@ -4,6 +4,7 @@ import com.example.catwork.R
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.domain.usecase.AddToDoUseCase
 import com.example.catwork.domain.usecase.GetToDoListUseCase
+import com.example.catwork.domain.usecase.UpdateToDoUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -12,7 +13,8 @@ import java.util.*
 class HomePresenter(
     private val view: HomeContract.View,
     private val getToDoListUseCase: GetToDoListUseCase,
-    private val addToDoUseCase: AddToDoUseCase
+    private val addToDoUseCase: AddToDoUseCase,
+    private val updateToDoUseCase: UpdateToDoUseCase
 ) : HomeContract.Presenter {
 
     override val scope: CoroutineScope = MainScope()
@@ -50,7 +52,9 @@ class HomePresenter(
     }
 
     override fun updateToDoEntity(toDoEntity: ToDoEntity) {
-//        updateToDoUseCase(toDoEntity)
+        scope.launch {
+            updateToDoUseCase(toDoEntity)
+        }
     }
 }
 
