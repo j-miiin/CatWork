@@ -13,11 +13,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
     lateinit var toDoItemCheckListener: (ToDoEntity) -> Unit
 
     inner class ToDoItemViewHolder(
-        private val binding: ViewholderItemTodoBinding
+        private val binding: ViewholderItemTodoBinding,
+        val toDoItemClickListener: (ToDoEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: ToDoEntity) = with(binding) {
-            checkBox.text = data.title
+            toDoText.text = data.title
             checkBox.isChecked = data.isChecked
         }
 
@@ -41,7 +42,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ToDoItemViewHolder {
         val view = ViewholderItemTodoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ToDoItemViewHolder(view)
+        return ToDoItemViewHolder(view, toDoItemClickListener)
     }
 
     override fun onBindViewHolder(holder: HomeAdapter.ToDoItemViewHolder, position: Int) {
