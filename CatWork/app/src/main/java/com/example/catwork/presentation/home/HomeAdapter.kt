@@ -22,14 +22,15 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
         }
 
         fun bindViews(data: ToDoEntity) {
+            binding.root.setOnClickListener {
+                toDoItemClickListener(data)
+            }
+
             binding.checkBox.setOnClickListener {
                 toDoItemCheckListener(
                     data.copy(isChecked = binding.checkBox.isChecked)
                 )
                 checkToDoComplete(binding.checkBox.isChecked)
-            }
-            binding.root.setOnClickListener {
-                toDoItemClickListener(data)
             }
         }
 

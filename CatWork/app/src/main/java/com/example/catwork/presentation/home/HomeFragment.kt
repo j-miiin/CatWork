@@ -1,6 +1,7 @@
 package com.example.catwork.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
+import com.example.catwork.presentation.home.dialog.DetailToDoDialog
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
 
@@ -73,7 +75,8 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         (binding?.recyclerView?.adapter as? HomeAdapter)?.run {
             setToDoList(toDoList,
                 toDoItemClickListener = {
-                    //TODO Update 화면으로 이동 -> 기능 좀 더 고민
+                    DetailToDoDialog(requireContext(), it) {
+                    }.show()
                 },
                 toDoItemCheckListener = {
                     presenter.updateToDoEntity(it)
