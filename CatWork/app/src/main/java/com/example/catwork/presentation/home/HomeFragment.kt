@@ -1,7 +1,6 @@
 package com.example.catwork.presentation.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,9 @@ import org.koin.androidx.scope.ScopeFragment
 
 class HomeFragment : ScopeFragment(), HomeContract.View {
 
-    private var binding: FragmentHomeBinding? = null
+    private lateinit var binding: FragmentHomeBinding
+
+    private var editMode = false
 
     override val presenter: HomeContract.Presenter by inject()
 
@@ -37,16 +38,23 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         presenter.onViewCreated()
     }
 
-    private fun initViews() {
-        binding?.recyclerView?.apply {
+    private fun initViews(){
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = HomeAdapter()
         }
 
-        binding?.addToDoItemButton?.setOnClickListener {
+        binding.addToDoItemButton.setOnClickListener {
             AddToDoDialog(requireContext()) {
-                presenter.addToDo(it)
+                presenter.addToDoItem(it)
             }.show()
+        }
+
+        binding.editButton.setOnClickListener {
+            editMode = !editMode
+            (binding.recyclerView.adapter as HomeAdapter).run {
+                setEditMode(editMode)
+            }
         }
     }
 
@@ -56,32 +64,35 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
     }
 
     override fun showLoadingIndicator() {
-        binding?.progressBar?.toVisible()
+        binding.progressBar.toVisible()
     }
 
     override fun hideLoadingIndicator() {
-        binding?.progressBar?.toGone()
+        binding.progressBar.toGone()
     }
 
     override fun showErrorDescription(message: String) {
-        binding?.recyclerView?.toGone()
-        binding?.errorDescriptionTextView?.toVisible()
-        binding?.errorDescriptionTextView?.text = message
+        binding.recyclerView.toGone()
+        binding.errorDescriptionTextView.toVisible()
+        binding.errorDescriptionTextView.text = message
     }
 
     override fun showToDoList(toDoList: List<ToDoEntity>) {
-        binding?.recyclerView?.toVisible()
-        binding?.errorDescriptionTextView?.toGone()
-        (binding?.recyclerView?.adapter as? HomeAdapter)?.run {
-            setToDoList(toDoList,
+        binding.recyclerView.toVisible()
+        binding.errorDescriptionTextView.toGone()
+        (binding.recyclerView.adapter as HomeAdapter).run {
+            setToDoList(
+                toDoList as ArrayList<ToDoEntity>,
                 toDoItemClickListener = {
                     DetailToDoDialog(requireContext(), it) {
                     }.show()
                 },
                 toDoItemCheckListener = {
-                    presenter.updateToDoEntity(it)
+                    presenter.updateToDoItem(it)
+                },
+                toDoItemDeleteListener = {
+                    presenter.deleteToDoItem(it.id)
                 })
-            notifyDataSetChanged()
         }
     }
 }

@@ -44,7 +44,6 @@ class DetailToDoDialog(
                 titleEditText.isEnabled = true
                 contentEditText.isEnabled = true
                 alarmCheckBox.toVisible()
-                alarmTimePicker.toVisible()
             } else {
                 titleEditText.isEnabled = false
                 contentEditText.isEnabled = false

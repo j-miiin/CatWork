@@ -22,7 +22,8 @@ class ToDoItemRepositoryImpl(
         toDoDao.update(toDoEntity)
     }
 
-//    override suspend fun removeToDoItem(toDoItem: ToDoEntity) {
-//    }
+    override suspend fun deleteToDoItem(id: String) {
+        toDoDao.delete(id)
+    }
 
 }

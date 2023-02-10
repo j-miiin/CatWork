@@ -3,6 +3,7 @@ package com.example.catwork.presentation.home
 import com.example.catwork.R
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.domain.usecase.AddToDoUseCase
+import com.example.catwork.domain.usecase.DeleteToDoUseCase
 import com.example.catwork.domain.usecase.GetToDoListUseCase
 import com.example.catwork.domain.usecase.UpdateToDoUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,8 @@ class HomePresenter(
     private val view: HomeContract.View,
     private val getToDoListUseCase: GetToDoListUseCase,
     private val addToDoUseCase: AddToDoUseCase,
-    private val updateToDoUseCase: UpdateToDoUseCase
+    private val updateToDoUseCase: UpdateToDoUseCase,
+    private val deleteToDoUseCase: DeleteToDoUseCase
 ) : HomeContract.Presenter {
 
     override val scope: CoroutineScope = MainScope()
@@ -44,16 +46,22 @@ class HomePresenter(
         }
     }
 
-    override fun addToDo(toDoEntity: ToDoEntity) {
+    override fun addToDoItem(toDoEntity: ToDoEntity) {
         scope.launch {
             addToDoUseCase(toDoEntity)
             fetchToDoList()
         }
     }
 
-    override fun updateToDoEntity(toDoEntity: ToDoEntity) {
+    override fun updateToDoItem(toDoEntity: ToDoEntity) {
         scope.launch {
             updateToDoUseCase(toDoEntity)
+        }
+    }
+
+    override fun deleteToDoItem(id: String) {
+        scope.launch {
+            deleteToDoUseCase(id)
         }
     }
 }

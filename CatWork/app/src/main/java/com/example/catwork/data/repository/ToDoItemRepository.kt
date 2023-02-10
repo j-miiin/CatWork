@@ -10,5 +10,5 @@ interface ToDoItemRepository {
 
     suspend fun updateToDoItem(toDoItem: ToDoEntity)
 
-//    suspend fun removeToDoItem(toDoItem: ToDoEntity)
+    suspend fun deleteToDoItem(id: String)
 }
