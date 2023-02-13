@@ -22,6 +22,7 @@ class DetailToDoDialog(
     private lateinit var binding: DialogDetailTodoBinding
 
     private var editMode = false
+    private var alarmMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,11 @@ class DetailToDoDialog(
                 titleEditText.isEnabled = true
                 contentEditText.isEnabled = true
                 alarmCheckBox.toVisible()
+                alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                    alarmMode = isChecked
+                    if (isChecked) alarmTimePicker.toVisible()
+                    else alarmTimePicker.toGone()
+                }
             } else {
                 titleEditText.isEnabled = false
                 contentEditText.isEnabled = false
@@ -64,7 +70,7 @@ class DetailToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = false,
-                        dueTo = getTimePickerValue()  // TimePicker에서 설정한 시간
+                        dueTo = if (alarmMode) getTimePickerValue() else ""  // TimePicker에서 설정한 시간
                     )
                 )
                 dismiss()

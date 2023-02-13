@@ -11,6 +11,8 @@ import androidx.annotation.RequiresApi
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogAddTodoBinding
 import com.example.catwork.ext.getRandomID
+import com.example.catwork.ext.toGone
+import com.example.catwork.ext.toVisible
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -23,6 +25,8 @@ class AddToDoDialog(
 
     private lateinit var binding: DialogAddTodoBinding
 
+    private var alarmMode = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DialogAddTodoBinding.inflate(layoutInflater)
@@ -34,6 +38,13 @@ class AddToDoDialog(
         setCancelable(true)
 
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            alarmMode = isChecked
+            if (isChecked) alarmTimePicker.toVisible()
+            else alarmTimePicker.toGone()
+        }
+
         addToDoButton.setOnClickListener {
             if (titleEditText.text.isNullOrBlank()) {
                 Toast.makeText(context, "할 일을 입력해주세요!", Toast.LENGTH_SHORT).show()
@@ -44,7 +55,7 @@ class AddToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = false,
-                        dueTo = getTimePickerValue()  // TimePicker에서 설정한 시간
+                        dueTo = if (alarmMode) getTimePickerValue() else ""  // TimePicker에서 설정한 시간
                     )
                 )
                 dismiss()
