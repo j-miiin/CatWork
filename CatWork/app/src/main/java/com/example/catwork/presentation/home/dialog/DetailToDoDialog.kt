@@ -64,11 +64,19 @@ class DetailToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = false,
-                        dueTo = Date()  // TimePicker에서 설정한 시간
+                        dueTo = getTimePickerValue()  // TimePicker에서 설정한 시간
                     )
                 )
                 dismiss()
             }
         }
+    }
+
+    private fun getTimePickerValue(): String {
+        var time = ""
+        binding.alarmTimePicker.setOnTimeChangedListener { timePicker, hour, minute ->
+            time = "${hour}:${minute}"
+        }
+        return time
     }
 }

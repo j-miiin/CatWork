@@ -4,12 +4,17 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogAddTodoBinding
 import com.example.catwork.ext.getRandomID
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class AddToDoDialog(
     context: Context,
@@ -39,7 +44,7 @@ class AddToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = false,
-                        dueTo = Date()  // TimePicker에서 설정한 시간
+                        dueTo = getTimePickerValue()  // TimePicker에서 설정한 시간
                     )
                 )
                 dismiss()
@@ -49,5 +54,13 @@ class AddToDoDialog(
         cancelButton.setOnClickListener {
             dismiss()
         }
+    }
+
+    private fun getTimePickerValue(): String {
+        var time = ""
+        binding.alarmTimePicker.setOnTimeChangedListener { timePicker, hour, minute ->
+            time = "${hour}:${minute}"
+        }
+        return time
     }
 }

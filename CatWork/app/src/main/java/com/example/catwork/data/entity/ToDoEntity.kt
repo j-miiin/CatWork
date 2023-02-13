@@ -10,5 +10,5 @@ data class ToDoEntity(
     val title: String,
     val content: String,
     val isChecked: Boolean = false,
-    val dueTo: Date
+    val dueTo: String?
 )

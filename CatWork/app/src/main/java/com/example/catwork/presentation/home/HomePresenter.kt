@@ -72,42 +72,42 @@ class HomePresenter(
 //        title = "Wavve 인턴 지원하기",
 //        content = "재밌겠다",
 //        isChecked = false,
-//        dueTo = Date()
+//        dueTo = ""
 //    ),
 //    ToDoEntity(
 //        id = "2",
 //        title = "청소하기",
 //        content = "재밌겠다",
 //        isChecked = false,
-//        dueTo = Date()
+//        dueTo = ""
 //    ),
 //    ToDoEntity(
 //        id = "3",
 //        title = "고양이랑 놀기",
 //        content = "재밌겠다",
 //        isChecked = false,
-//        dueTo = Date()
+//        dueTo = ""
 //    ),
 //    ToDoEntity(
 //        id = "4",
 //        title = "알고리즘 문제 풀기",
 //        content = "재밌겠다",
 //        isChecked = false,
-//        dueTo = Date()
+//        dueTo = ""
 //    ),
 //    ToDoEntity(
 //        id = "5",
 //        title = "CatWork 프로젝트 진행",
 //        content = "재밌겠다",
 //        isChecked = false,
-//        dueTo = Date()
+//        dueTo = ""
 //    ),
 //    ToDoEntity(
 //        id = "6",
 //        title = "Wavve 보기",
 //        content = "재밌겠다",
 //        isChecked = false,
-//        dueTo = Date()
+//        dueTo = ""
 //    ),
 //)
 
