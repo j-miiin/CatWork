@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogDetailTodoBinding
@@ -34,6 +35,7 @@ class DetailToDoDialog(
     private fun initViews() = with(binding) {
         setCancelable(true)
 
+        Log.d("timecheck", toDoEntity.dueTo.toString())
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         titleEditText.setText(toDoEntity.title)

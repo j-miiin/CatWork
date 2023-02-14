@@ -16,10 +16,8 @@
     </style>
 
     <!-- Alarm Time Picker -->
-    <style name="Theme.AlarmTimePicker" parent="Theme.CatWork">
-        <item name="android:textSize">20sp</item>
-        <item name="fontFamily">@font/nanum_font</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="android:backgroundTint">@color/primaryLightColor</item>
+    <style name="AlarmTimePicker">
+        <item name="android:textSize">17sp</item>
+        <item name="font">@font/nanummyeongjo</item>
     </style>
 </resources>

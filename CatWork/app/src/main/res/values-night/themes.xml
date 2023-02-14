@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Alarm Time Picker -->
+    <style name="AlarmTimePicker">
+        <item name="android:textSize">17sp</item>
+        <item name="font">@font/nanummyeongjo</item>
+    </style>
 </resources>

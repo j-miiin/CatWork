@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.catwork.data.entity.ToDoEntity
@@ -68,10 +69,8 @@ class AddToDoDialog(
     }
 
     private fun getTimePickerValue(): String {
-        var time = ""
-        binding.alarmTimePicker.setOnTimeChangedListener { timePicker, hour, minute ->
-            time = "${hour}:${minute}"
-        }
-        return time
+        val hour = binding.alarmTimePicker.hour
+        val minute = binding.alarmTimePicker.minute
+        return "${hour}:${minute}"
     }
 }
