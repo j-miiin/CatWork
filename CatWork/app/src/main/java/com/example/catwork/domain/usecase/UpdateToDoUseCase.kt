@@ -5,5 +5,7 @@ import com.example.catwork.data.repository.ToDoItemRepository
 
 class UpdateToDoUseCase(private val toDoItemRepository: ToDoItemRepository) {
 
-    suspend operator fun invoke(toDoEntity: ToDoEntity) = toDoItemRepository.updateToDoItem(toDoEntity)
+    suspend operator fun invoke(toDoEntity: ToDoEntity) {
+        return toDoItemRepository.updateToDoItem(toDoEntity)
+    }
 }

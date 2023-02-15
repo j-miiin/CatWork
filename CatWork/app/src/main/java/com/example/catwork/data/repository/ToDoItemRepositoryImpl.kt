@@ -18,11 +18,11 @@ class ToDoItemRepositoryImpl(
         toDoDao.insert(toDoEntity)
     }
 
-    override suspend fun updateToDoItem(toDoEntity: ToDoEntity) {
+    override suspend fun updateToDoItem(toDoEntity: ToDoEntity) = withContext(dispatcher) {
         toDoDao.update(toDoEntity)
     }
 
-    override suspend fun deleteToDoItem(id: String) {
+    override suspend fun deleteToDoItem(id: String) = withContext(dispatcher) {
         toDoDao.delete(id)
     }
 

@@ -83,8 +83,14 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         (binding.recyclerView.adapter as HomeAdapter).run {
             setToDoList(
                 toDoList as ArrayList<ToDoEntity>,
-                toDoItemClickListener = {
-                    DetailToDoDialog(requireContext(), it) {
+                toDoItemClickListener = { toDoEntity ->
+                    DetailToDoDialog(requireContext(), toDoEntity) {
+                        val updateToDoEntity = toDoEntity.copy(
+                            title = it.title,
+                            content = it.content,
+                            dueTo = it.dueTo
+                        )
+                        presenter.updateToDoItem(updateToDoEntity)
                     }.show()
                 },
                 toDoItemCheckListener = {

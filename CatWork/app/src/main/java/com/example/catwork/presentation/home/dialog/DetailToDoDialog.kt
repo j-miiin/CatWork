@@ -34,8 +34,8 @@ class DetailToDoDialog(
 
     private fun initViews() = with(binding) {
         setCancelable(true)
+        Log.d("check", toDoEntity.isChecked.toString())
 
-        Log.d("timecheck", toDoEntity.dueTo.toString())
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         titleEditText.setText(toDoEntity.title)
@@ -66,12 +66,13 @@ class DetailToDoDialog(
             } else if (editMode) {
                 Toast.makeText(context, "수정을 완료해주세요!", Toast.LENGTH_SHORT).show()
             } else {
+                Log.d("title,content", titleEditText.text.toString()+" "+contentEditText.text.toString())
                 okCallBack(
                     ToDoEntity(
-                        id = getRandomID(),
+                        id = toDoEntity.id,
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
-                        isChecked = false,
+                        isChecked = toDoEntity.isChecked,
                         dueTo = if (alarmMode) getTimePickerValue() else ""  // TimePicker에서 설정한 시간
                     )
                 )
@@ -81,10 +82,8 @@ class DetailToDoDialog(
     }
 
     private fun getTimePickerValue(): String {
-        var time = ""
-        binding.alarmTimePicker.setOnTimeChangedListener { timePicker, hour, minute ->
-            time = "${hour}:${minute}"
-        }
-        return time
+        val hour = binding.alarmTimePicker.hour
+        val minute = binding.alarmTimePicker.minute
+        return "${hour}:${minute}"
     }
 }

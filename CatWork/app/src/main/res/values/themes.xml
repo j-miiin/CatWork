@@ -18,6 +18,6 @@
     <!-- Alarm Time Picker -->
     <style name="AlarmTimePicker">
         <item name="android:textSize">17sp</item>
-        <item name="font">@font/nanummyeongjo</item>
+        <item name="fontFamily">@font/nanummyeongjo</item>
     </style>
 </resources>
