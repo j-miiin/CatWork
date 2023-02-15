@@ -1,17 +1,20 @@
 package com.example.catwork.presentation.home.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogDetailTodoBinding
 import com.example.catwork.ext.getRandomID
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
+import com.example.catwork.presentation.home.HomeContract
 import java.util.*
 
 class DetailToDoDialog(
@@ -44,8 +47,8 @@ class DetailToDoDialog(
         editButton.setOnClickListener {
             editMode = !editMode
             if (editMode) {
-                titleEditText.isEnabled = true
-                contentEditText.isEnabled = true
+                titleEditText.isFocusableInTouchMode = true
+                contentEditText.isFocusableInTouchMode = true
                 alarmCheckBox.toVisible()
                 alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
                     alarmMode = isChecked
@@ -53,8 +56,11 @@ class DetailToDoDialog(
                     else alarmTimePicker.toGone()
                 }
             } else {
-                titleEditText.isEnabled = false
-                contentEditText.isEnabled = false
+                hideKeyboard()
+                titleEditText.isFocusableInTouchMode = false
+                titleEditText.isFocusable = false
+                contentEditText.isFocusableInTouchMode = false
+                contentEditText.isFocusable = false
                 alarmCheckBox.toGone()
                 alarmTimePicker.toGone()
             }
@@ -66,7 +72,6 @@ class DetailToDoDialog(
             } else if (editMode) {
                 Toast.makeText(context, "수정을 완료해주세요!", Toast.LENGTH_SHORT).show()
             } else {
-                Log.d("title,content", titleEditText.text.toString()+" "+contentEditText.text.toString())
                 okCallBack(
                     ToDoEntity(
                         id = toDoEntity.id,
@@ -85,5 +90,10 @@ class DetailToDoDialog(
         val hour = binding.alarmTimePicker.hour
         val minute = binding.alarmTimePicker.minute
         return "${hour}:${minute}"
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }

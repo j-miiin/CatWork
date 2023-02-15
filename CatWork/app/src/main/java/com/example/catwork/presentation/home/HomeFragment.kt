@@ -1,6 +1,7 @@
 package com.example.catwork.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,8 +91,10 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
                             content = it.content,
                             dueTo = it.dueTo
                         )
+                        Log.d("title,content", it.title+" "+it.content)
                         presenter.updateToDoItem(updateToDoEntity)
                     }.show()
+
                 },
                 toDoItemCheckListener = {
                     presenter.updateToDoItem(it)

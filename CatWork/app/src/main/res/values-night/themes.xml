@@ -12,11 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/nanum_font</item>
     </style>
 
     <!-- Alarm Time Picker -->
     <style name="AlarmTimePicker">
         <item name="android:textSize">17sp</item>
-        <item name="fontFamily">@font/nanummyeongjo</item>
+        <item name="fontFamily">@font/nanum_font</item>
     </style>
 </resources>
