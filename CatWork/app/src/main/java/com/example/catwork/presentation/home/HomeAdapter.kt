@@ -12,7 +12,7 @@ import com.example.catwork.ext.toVisible
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
     var toDoList = arrayListOf<ToDoEntity>()
-    lateinit var toDoItemClickListener: (ToDoEntity) -> Unit
+    lateinit var toDoItemClickListener: (ToDoEntity) -> (ToDoEntity)
     lateinit var toDoItemCheckListener: (ToDoEntity) -> Unit
     lateinit var toDoItemDeleteListener: (ToDoEntity) -> Unit
 
@@ -27,9 +27,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
             checkToDoComplete(data.isChecked)
         }
 
-        fun bindViews(data: ToDoEntity) = with(binding) {
+        fun bindViews(data: ToDoEntity, position: Int) = with(binding) {
             root.setOnClickListener {
-                toDoItemClickListener(data)
+                val updateToDoEntity = toDoItemClickListener(data)
+                toDoList.set(position, updateToDoEntity)
                 notifyDataSetChanged()
             }
 
@@ -62,14 +63,14 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
     override fun onBindViewHolder(holder: HomeAdapter.ToDoItemViewHolder, position: Int) {
         holder.bindData(toDoList[position])
-        holder.bindViews(toDoList[position])
+        holder.bindViews(toDoList[position], position)
     }
 
     override fun getItemCount(): Int = toDoList.size
 
     fun setToDoList(
         toDoList: ArrayList<ToDoEntity>,
-        toDoItemClickListener: (ToDoEntity) -> Unit,
+        toDoItemClickListener: (ToDoEntity) -> (ToDoEntity),
         toDoItemCheckListener: (ToDoEntity) -> Unit,
         toDoItemDeleteListener: (ToDoEntity) -> Unit
     ) {

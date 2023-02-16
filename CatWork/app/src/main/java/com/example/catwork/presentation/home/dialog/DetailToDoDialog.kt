@@ -6,27 +6,26 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogDetailTodoBinding
-import com.example.catwork.ext.getRandomID
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
-import com.example.catwork.presentation.home.HomeContract
 import java.util.*
 
 class DetailToDoDialog(
     context: Context,
     private val toDoEntity: ToDoEntity,
     private val okCallBack: (ToDoEntity) -> Unit
-) : Dialog(context) {
+) : Dialog(context), DetailToDoContract.View {
 
     private lateinit var binding: DialogDetailTodoBinding
 
     private var editMode = false
     private var alarmMode = false
+
+    override val presenter: DetailToDoContract.Presenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +36,6 @@ class DetailToDoDialog(
 
     private fun initViews() = with(binding) {
         setCancelable(true)
-        Log.d("check", toDoEntity.isChecked.toString())
 
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

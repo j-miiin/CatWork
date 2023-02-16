@@ -85,16 +85,16 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
             setToDoList(
                 toDoList as ArrayList<ToDoEntity>,
                 toDoItemClickListener = { toDoEntity ->
+                    var updateToDoEntity = toDoEntity.copy()
                     DetailToDoDialog(requireContext(), toDoEntity) {
-                        val updateToDoEntity = toDoEntity.copy(
+                        updateToDoEntity = toDoEntity.copy(
                             title = it.title,
                             content = it.content,
                             dueTo = it.dueTo
                         )
-                        Log.d("title,content", it.title+" "+it.content)
-                        presenter.updateToDoItem(updateToDoEntity)
                     }.show()
-
+                    presenter.updateToDoItem(updateToDoEntity)
+                    updateToDoEntity
                 },
                 toDoItemCheckListener = {
                     presenter.updateToDoItem(it)
