@@ -12,20 +12,17 @@ import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogDetailTodoBinding
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
-import java.util.*
 
 class DetailToDoDialog(
     context: Context,
     private val toDoEntity: ToDoEntity,
     private val okCallBack: (ToDoEntity) -> Unit
-) : Dialog(context), DetailToDoContract.View {
+) : Dialog(context) {
 
     private lateinit var binding: DialogDetailTodoBinding
 
     private var editMode = false
     private var alarmMode = false
-
-    override val presenter: DetailToDoContract.Presenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

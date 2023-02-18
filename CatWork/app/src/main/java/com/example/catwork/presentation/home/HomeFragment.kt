@@ -92,8 +92,9 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
                             content = it.content,
                             dueTo = it.dueTo
                         )
+                        presenter.updateToDoItem(updateToDoEntity)
                     }.show()
-                    presenter.updateToDoItem(updateToDoEntity)
+                    presenter.fetchToDoList()
                     updateToDoEntity
                 },
                 toDoItemCheckListener = {
