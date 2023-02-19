@@ -1,5 +1,6 @@
 package com.example.catwork.presentation.home
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import com.example.catwork.presentation.home.dialog.AddToDoDialog
 import com.example.catwork.presentation.home.dialog.DetailToDoDialog
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : ScopeFragment(), HomeContract.View {
@@ -24,6 +27,11 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
     private var editMode = false
 
     override val presenter: HomeContract.Presenter by inject()
+
+    private val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"), Locale.KOREA)
+    private val year = calendar.get(Calendar.YEAR)
+    private val month = calendar.get(Calendar.MONTH)
+    private val day = calendar.get(Calendar.DAY_OF_MONTH)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,24 +47,44 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         presenter.onViewCreated()
     }
 
-    private fun initViews(){
-        binding.recyclerView.apply {
+    private fun initViews() = with(binding) {
+
+        yearTextView.text = "${year}년"
+        dateTextView.text = "${month+1}월 ${day}일"
+
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = HomeAdapter()
         }
 
-        binding.addToDoItemButton.setOnClickListener {
+        addToDoItemButton.setOnClickListener {
             AddToDoDialog(requireContext()) {
                 presenter.addToDoItem(it)
             }.show()
         }
 
-        binding.editButton.setOnClickListener {
+        editButton.setOnClickListener {
             editMode = !editMode
             (binding.recyclerView.adapter as HomeAdapter).run {
                 setEditMode(editMode)
             }
         }
+
+        yearTextView.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        dateTextView.setOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog() {
+        val dateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
+            binding.yearTextView.text = "${year}년"
+            binding.dateTextView.text = "${month+1}월 ${day}일"
+        }
+        DatePickerDialog(requireContext(), dateSetListener, year, month, day).show()
     }
 
     override fun onDestroy() {
