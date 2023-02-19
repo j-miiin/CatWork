@@ -83,19 +83,10 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         binding.errorDescriptionTextView.toGone()
         (binding.recyclerView.adapter as HomeAdapter).run {
             setToDoList(
+                requireContext(),
                 toDoList as ArrayList<ToDoEntity>,
-                toDoItemClickListener = { toDoEntity ->
-                    var updateToDoEntity = toDoEntity.copy()
-                    DetailToDoDialog(requireContext(), toDoEntity) {
-                        updateToDoEntity = toDoEntity.copy(
-                            title = it.title,
-                            content = it.content,
-                            dueTo = it.dueTo
-                        )
-                        presenter.updateToDoItem(updateToDoEntity)
-                    }.show()
-                    presenter.fetchToDoList()
-                    updateToDoEntity
+                toDoItemClickListener = {
+                    presenter.updateToDoItem(it)
                 },
                 toDoItemCheckListener = {
                     presenter.updateToDoItem(it)
