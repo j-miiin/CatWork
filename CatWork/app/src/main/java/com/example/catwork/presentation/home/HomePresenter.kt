@@ -27,7 +27,7 @@ class HomePresenter(
 
     override fun onDestroyView() { }
 
-    override fun fetchToDoList() {
+    override fun fetchToDoList(createdAt: String) {
         scope.launch {
             try {
                 view.showLoadingIndicator()
@@ -49,7 +49,7 @@ class HomePresenter(
     override fun addToDoItem(toDoEntity: ToDoEntity) {
         scope.launch {
             addToDoUseCase(toDoEntity)
-            fetchToDoList()
+            fetchToDoList(toDoEntity.createdAt)
         }
     }
 
