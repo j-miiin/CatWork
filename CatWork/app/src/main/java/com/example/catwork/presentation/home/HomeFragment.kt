@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
+import com.example.catwork.ext.getTodayDate
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
@@ -28,11 +29,6 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
 
     override val presenter: HomeContract.Presenter by inject()
 
-    private val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"), Locale.KOREA)
-    private val year = calendar.get(Calendar.YEAR)
-    private val month = calendar.get(Calendar.MONTH)
-    private val day = calendar.get(Calendar.DAY_OF_MONTH)
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,8 +45,13 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
 
     private fun initViews() = with(binding) {
 
+        val dateInfo = getTodayDate()
+        val year = dateInfo[0]
+        val month = dateInfo[1]
+        val day = dateInfo[2]
+
         yearTextView.text = "${year}년"
-        dateTextView.text = "${month+1}월 ${day}일"
+        dateTextView.text = "${month}월 ${day}일"
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -82,8 +83,13 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
     private fun showDatePickerDialog() {
         val dateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
             binding.yearTextView.text = "${year}년"
-            binding.dateTextView.text = "${month+1}월 ${day}일"
+            binding.dateTextView.text = "${month}월 ${day}일"
         }
+
+        val dateInfo = getTodayDate()
+        val year = dateInfo[0]
+        val month = dateInfo[1]
+        val day = dateInfo[2]
         DatePickerDialog(requireContext(), dateSetListener, year, month, day).show()
     }
 

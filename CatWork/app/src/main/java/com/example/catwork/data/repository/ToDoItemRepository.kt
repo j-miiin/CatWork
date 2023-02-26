@@ -4,7 +4,7 @@ import com.example.catwork.data.entity.ToDoEntity
 
 interface ToDoItemRepository {
 
-    suspend fun getToDoList(): List<ToDoEntity>
+    suspend fun getToDoList(createdAt: String): List<ToDoEntity>
 
     suspend fun addToDoItem(toDoEntity: ToDoEntity)
 

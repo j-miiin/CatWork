@@ -6,6 +6,7 @@ import com.example.catwork.domain.usecase.AddToDoUseCase
 import com.example.catwork.domain.usecase.DeleteToDoUseCase
 import com.example.catwork.domain.usecase.GetToDoListUseCase
 import com.example.catwork.domain.usecase.UpdateToDoUseCase
+import com.example.catwork.ext.getTodayDateString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class HomePresenter(
     override val scope: CoroutineScope = MainScope()
 
     override fun onViewCreated() {
-        fetchToDoList()
+        fetchToDoList(getTodayDateString())
     }
 
     override fun onDestroyView() { }
@@ -31,7 +32,7 @@ class HomePresenter(
         scope.launch {
             try {
                 view.showLoadingIndicator()
-                val toDoList = getToDoListUseCase()
+                val toDoList = getToDoListUseCase(createdAt)
                 if (toDoList.isEmpty()) {
                     view.showErrorDescription("오늘의 할 일을 입력해보세요!")
                 } else {

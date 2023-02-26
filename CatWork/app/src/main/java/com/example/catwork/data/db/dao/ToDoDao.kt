@@ -9,8 +9,8 @@ import com.example.catwork.data.entity.ToDoEntity
 @Dao
 interface ToDoDao {
 
-    @Query("SELECT * FROM ToDoEntity")
-    suspend fun getAll(): List<ToDoEntity>
+    @Query("SELECT * FROM ToDoEntity WHERE createdAt=:createdAt")
+    suspend fun getAll(createdAt: String): List<ToDoEntity>
 
     @Insert
     suspend fun insert(toDoEntity: ToDoEntity)

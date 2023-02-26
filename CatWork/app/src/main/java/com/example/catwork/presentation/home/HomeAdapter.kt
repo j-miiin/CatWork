@@ -97,6 +97,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
     private fun showDetailToDoDialog(data: ToDoEntity, position: Int): ToDoEntity {
         var updateToDoEntity = data.copy()
         DetailToDoDialog(context, data) {
+            Log.d("date", it.createdAt)
             updateToDoEntity = it
             toDoList.set(position, it)
             notifyItemChanged(position)

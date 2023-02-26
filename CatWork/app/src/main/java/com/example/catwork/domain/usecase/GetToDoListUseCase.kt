@@ -5,5 +5,5 @@ import com.example.catwork.data.entity.ToDoEntity
 
 class GetToDoListUseCase(private val toDoItemRepository: ToDoItemRepository) {
 
-    suspend operator fun invoke(): List<ToDoEntity> = toDoItemRepository.getToDoList()
+    suspend operator fun invoke(createdAt: String): List<ToDoEntity> = toDoItemRepository.getToDoList(createdAt)
 }

@@ -10,8 +10,8 @@ class ToDoItemRepositoryImpl(
     private val dispatcher: CoroutineDispatcher
 ) : ToDoItemRepository {
 
-    override suspend fun getToDoList(): List<ToDoEntity> = withContext(dispatcher) {
-        toDoDao.getAll()
+    override suspend fun getToDoList(createdAt: String): List<ToDoEntity> = withContext(dispatcher) {
+        toDoDao.getAll(createdAt)
     }
 
     override suspend fun addToDoItem(toDoEntity: ToDoEntity) = withContext(dispatcher) {

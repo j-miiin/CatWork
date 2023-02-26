@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogDetailTodoBinding
+import com.example.catwork.ext.getTodayDateString
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
 
@@ -73,7 +74,8 @@ class DetailToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = toDoEntity.isChecked,
-                        dueTo = if (alarmMode) getTimePickerValue() else ""  // TimePicker에서 설정한 시간
+                        dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
+                        createdAt = toDoEntity.createdAt
                     )
                 )
                 dismiss()

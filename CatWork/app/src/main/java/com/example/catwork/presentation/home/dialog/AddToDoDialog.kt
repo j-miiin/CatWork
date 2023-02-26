@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogAddTodoBinding
 import com.example.catwork.ext.getRandomID
+import com.example.catwork.ext.getTodayDateString
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
 import java.text.SimpleDateFormat
@@ -56,7 +57,8 @@ class AddToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = false,
-                        dueTo = if (alarmMode) getTimePickerValue() else ""  // TimePicker에서 설정한 시간
+                        dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
+                        createdAt = getTodayDateString()
                     )
                 )
                 dismiss()
