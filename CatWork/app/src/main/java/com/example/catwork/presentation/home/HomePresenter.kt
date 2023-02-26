@@ -1,11 +1,13 @@
 package com.example.catwork.presentation.home
 
+import android.util.Log
 import com.example.catwork.R
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.domain.usecase.AddToDoUseCase
 import com.example.catwork.domain.usecase.DeleteToDoUseCase
 import com.example.catwork.domain.usecase.GetToDoListUseCase
 import com.example.catwork.domain.usecase.UpdateToDoUseCase
+import com.example.catwork.ext.getTodayDate
 import com.example.catwork.ext.getTodayDateString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope

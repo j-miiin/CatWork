@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
@@ -39,6 +40,8 @@ class DetailToDoDialog(
 
         titleEditText.setText(toDoEntity.title)
         contentEditText.setText(toDoEntity.content)
+
+        Log.d("date", toDoEntity.createdAt)
 
         editButton.setOnClickListener {
             editMode = !editMode

@@ -22,6 +22,7 @@ import java.util.*
 
 class AddToDoDialog(
     context: Context,
+    private val selectedDate: String,
     private val okCallBack: (ToDoEntity) -> Unit
 ) : Dialog(context) {
 
@@ -51,6 +52,7 @@ class AddToDoDialog(
             if (titleEditText.text.isNullOrBlank()) {
                 Toast.makeText(context, "할 일을 입력해주세요!", Toast.LENGTH_SHORT).show()
             } else {
+                Log.d("create Date", selectedDate)
                 okCallBack(
                     ToDoEntity(
                         id = getRandomID(),
@@ -58,7 +60,7 @@ class AddToDoDialog(
                         content = contentEditText.text.toString(),
                         isChecked = false,
                         dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
-                        createdAt = getTodayDateString()
+                        createdAt = selectedDate
                     )
                 )
                 dismiss()

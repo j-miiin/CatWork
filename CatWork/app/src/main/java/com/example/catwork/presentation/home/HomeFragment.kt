@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
+import com.example.catwork.ext.getSelectedDateString
 import com.example.catwork.ext.getTodayDate
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
@@ -24,6 +25,10 @@ import kotlin.collections.ArrayList
 class HomeFragment : ScopeFragment(), HomeContract.View {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private var selectedYear = 0
+    private var selectedMonth = 0
+    private var selectedDay = 0
 
     private var editMode = false
 
@@ -46,12 +51,12 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
     private fun initViews() = with(binding) {
 
         val dateInfo = getTodayDate()
-        val year = dateInfo[0]
-        val month = dateInfo[1]
-        val day = dateInfo[2]
+        selectedYear = dateInfo[0]
+        selectedMonth = dateInfo[1] + 1
+        selectedDay = dateInfo[2]
 
-        yearTextView.text = "${year}년"
-        dateTextView.text = "${month}월 ${day}일"
+        yearTextView.text = "${selectedYear}년"
+        dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -59,7 +64,7 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         }
 
         addToDoItemButton.setOnClickListener {
-            AddToDoDialog(requireContext()) {
+            AddToDoDialog(requireContext(), getSelectedDateString(selectedYear, selectedMonth, selectedDay)) {
                 presenter.addToDoItem(it)
             }.show()
         }
@@ -82,15 +87,18 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
 
     private fun showDatePickerDialog() {
         val dateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
-            binding.yearTextView.text = "${year}년"
-            binding.dateTextView.text = "${month}월 ${day}일"
+            selectedYear = year
+            selectedMonth = month + 1
+            selectedDay = day
+
+            binding.yearTextView.text = "${selectedYear}년"
+            binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
+
+            presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
 
-        val dateInfo = getTodayDate()
-        val year = dateInfo[0]
-        val month = dateInfo[1]
-        val day = dateInfo[2]
-        DatePickerDialog(requireContext(), dateSetListener, year, month, day).show()
+        Log.d("month", selectedMonth.toString())
+        DatePickerDialog(requireContext(), dateSetListener, selectedYear, selectedMonth-1, selectedDay).show()
     }
 
     override fun onDestroy() {
