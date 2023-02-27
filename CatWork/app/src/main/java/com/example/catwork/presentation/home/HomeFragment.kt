@@ -2,7 +2,6 @@ package com.example.catwork.presentation.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
-import com.example.catwork.ext.getSelectedDateString
-import com.example.catwork.ext.getTodayDate
-import com.example.catwork.ext.toGone
-import com.example.catwork.ext.toVisible
+import com.example.catwork.ext.*
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
-import com.example.catwork.presentation.home.dialog.DetailToDoDialog
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -82,6 +76,30 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
 
         dateTextView.setOnClickListener {
             showDatePickerDialog()
+        }
+
+        yesterdayButton.setOnClickListener {
+            val yesterdayDateInfo = getYesterdayDate()
+            selectedYear = yesterdayDateInfo[0]
+            selectedMonth = yesterdayDateInfo[1] + 1
+            selectedDay = yesterdayDateInfo[2]
+
+            binding.yearTextView.text = "${selectedYear}년"
+            binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
+
+            presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+        }
+
+        tomorrowDayButton.setOnClickListener {
+            val tomorrowDateInfo = getTomorrowDate()
+            selectedYear = tomorrowDateInfo[0]
+            selectedMonth = tomorrowDateInfo[1] + 1
+            selectedDay = tomorrowDateInfo[2]
+
+            binding.yearTextView.text = "${selectedYear}년"
+            binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
+
+            presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
     }
 

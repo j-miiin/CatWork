@@ -48,6 +48,26 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="2월 20일" />
 
+        <Button
+            android:id="@+id/yesterdayButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ic_baseline_keyboard_arrow_left_24"
+            app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+            app:layout_constraintEnd_toStartOf="@id/dateTextView"
+            app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
+        <Button
+            android:id="@+id/tomorrowDayButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+            app:layout_constraintStart_toEndOf="@id/dateTextView"
+            app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
