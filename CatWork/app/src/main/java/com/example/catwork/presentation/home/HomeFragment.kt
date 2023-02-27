@@ -97,7 +97,6 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
             presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
 
-        Log.d("month", selectedMonth.toString())
         DatePickerDialog(requireContext(), dateSetListener, selectedYear, selectedMonth-1, selectedDay).show()
     }
 

@@ -25,6 +25,7 @@ class DetailToDoDialog(
 
     private var editMode = false
     private var alarmMode = false
+    private var alarmTime = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,9 @@ class DetailToDoDialog(
         titleEditText.setText(toDoEntity.title)
         contentEditText.setText(toDoEntity.content)
 
-        Log.d("date", toDoEntity.createdAt)
+        alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            alarmMode = isChecked
+        }
 
         editButton.setOnClickListener {
             editMode = !editMode
@@ -49,10 +52,10 @@ class DetailToDoDialog(
                 titleEditText.isFocusableInTouchMode = true
                 contentEditText.isFocusableInTouchMode = true
                 alarmCheckBox.toVisible()
-                alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                    alarmMode = isChecked
-                    if (isChecked) alarmTimePicker.toVisible()
-                    else alarmTimePicker.toGone()
+                if (toDoEntity.dueTo.isNotEmpty()) {
+                    alarmMode = true
+                    alarmCheckBox.isChecked = true
+                    alarmTimePicker.toVisible()
                 }
             } else {
                 hideKeyboard()

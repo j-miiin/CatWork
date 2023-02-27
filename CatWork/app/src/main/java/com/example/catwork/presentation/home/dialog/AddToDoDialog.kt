@@ -1,5 +1,6 @@
 package com.example.catwork.presentation.home.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -7,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.catwork.data.entity.ToDoEntity
@@ -43,6 +45,7 @@ class AddToDoDialog(
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            hideKeyboard()
             alarmMode = isChecked
             if (isChecked) alarmTimePicker.toVisible()
             else alarmTimePicker.toGone()
@@ -52,7 +55,6 @@ class AddToDoDialog(
             if (titleEditText.text.isNullOrBlank()) {
                 Toast.makeText(context, "할 일을 입력해주세요!", Toast.LENGTH_SHORT).show()
             } else {
-                Log.d("create Date", selectedDate)
                 okCallBack(
                     ToDoEntity(
                         id = getRandomID(),
@@ -76,5 +78,10 @@ class AddToDoDialog(
         val hour = binding.alarmTimePicker.hour
         val minute = binding.alarmTimePicker.minute
         return "${hour}:${minute}"
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }
