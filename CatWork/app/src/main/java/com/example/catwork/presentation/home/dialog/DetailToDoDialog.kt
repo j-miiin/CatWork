@@ -6,14 +6,13 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogDetailTodoBinding
-import com.example.catwork.ext.getTodayDateString
 import com.example.catwork.ext.toGone
 import com.example.catwork.ext.toVisible
+import kotlin.math.min
 
 class DetailToDoDialog(
     context: Context,
@@ -25,7 +24,8 @@ class DetailToDoDialog(
 
     private var editMode = false
     private var alarmMode = false
-    private var alarmTime = ""
+    private var alarmHour = 0
+    private var alarmMinute = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +42,19 @@ class DetailToDoDialog(
         titleEditText.setText(toDoEntity.title)
         contentEditText.setText(toDoEntity.content)
 
+        if (toDoEntity.dueTo.isNotEmpty()) alarmMode = true
+
+        initTime()
+
         alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
             alarmMode = isChecked
+            if (alarmMode) alarmTimePicker.toVisible()
+            else alarmTimePicker.toGone()
+        }
+
+        alarmTimePicker.setOnTimeChangedListener { _, hour, minute ->
+            alarmHour = hour
+            alarmMinute = minute
         }
 
         editButton.setOnClickListener {
@@ -52,10 +63,10 @@ class DetailToDoDialog(
                 titleEditText.isFocusableInTouchMode = true
                 contentEditText.isFocusableInTouchMode = true
                 alarmCheckBox.toVisible()
-                if (toDoEntity.dueTo.isNotEmpty()) {
-                    alarmMode = true
-                    alarmCheckBox.isChecked = true
+                alarmCheckBox.isChecked = alarmMode
+                if (alarmMode) {
                     alarmTimePicker.toVisible()
+                    setTimePickerValue(alarmHour, alarmMinute)
                 }
             } else {
                 hideKeyboard()
@@ -87,6 +98,19 @@ class DetailToDoDialog(
                 dismiss()
             }
         }
+    }
+
+    private fun initTime() {
+        if (toDoEntity.dueTo.isNotEmpty()) {
+            val time = toDoEntity.dueTo.split(":")
+            alarmHour = time[0].toInt()
+            alarmMinute = time[1].toInt()
+        }
+    }
+
+    private fun setTimePickerValue(hour: Int, minute: Int) {
+        binding.alarmTimePicker.hour = hour
+        binding.alarmTimePicker.minute = minute
     }
 
     private fun getTimePickerValue(): String {
