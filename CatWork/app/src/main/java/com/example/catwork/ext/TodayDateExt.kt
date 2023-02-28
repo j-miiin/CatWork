@@ -41,9 +41,13 @@ fun getSelectedDateString(year: Int, month: Int, day: Int): String {
     return dateStr
 }
 
-fun getYesterdayDate(): List<Int> {
-    val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"), Locale.KOREA)
+fun getYesterdayDate(selectedYear: Int, selectedMonth: Int, selectedDay: Int): List<Int> {
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.YEAR, selectedYear)
+    calendar.set(Calendar.MONTH, selectedMonth)
+    calendar.set(Calendar.DAY_OF_MONTH, selectedDay)
     calendar.add(Calendar.DATE, -1)
+
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -51,9 +55,13 @@ fun getYesterdayDate(): List<Int> {
     return listOf(year, month, day)
 }
 
-fun getTomorrowDate(): List<Int> {
-    val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"), Locale.KOREA)
+fun getTomorrowDate(selectedYear: Int, selectedMonth: Int, selectedDay: Int): List<Int> {
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.YEAR, selectedYear)
+    calendar.set(Calendar.MONTH, selectedMonth)
+    calendar.set(Calendar.DAY_OF_MONTH, selectedDay)
     calendar.add(Calendar.DATE, 1)
+
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)

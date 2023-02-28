@@ -79,7 +79,7 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         }
 
         yesterdayButton.setOnClickListener {
-            val yesterdayDateInfo = getYesterdayDate()
+            val yesterdayDateInfo = getYesterdayDate(selectedYear, selectedMonth-1, selectedDay)
             selectedYear = yesterdayDateInfo[0]
             selectedMonth = yesterdayDateInfo[1] + 1
             selectedDay = yesterdayDateInfo[2]
@@ -91,7 +91,7 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
         }
 
         tomorrowDayButton.setOnClickListener {
-            val tomorrowDateInfo = getTomorrowDate()
+            val tomorrowDateInfo = getTomorrowDate(selectedYear, selectedMonth-1, selectedDay)
             selectedYear = tomorrowDateInfo[0]
             selectedMonth = tomorrowDateInfo[1] + 1
             selectedDay = tomorrowDateInfo[2]

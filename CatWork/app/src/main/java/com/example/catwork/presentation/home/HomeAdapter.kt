@@ -31,20 +31,20 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
         fun bindData(data: ToDoEntity) = with(binding) {
             toDoText.text = data.title
-            checkToDoComplete(data.isChecked)
+            checkBox.isChecked = data.isChecked
         }
 
-        fun bindViews(data: ToDoEntity, position: Int) = with(binding) {
+        fun bindViews(data: ToDoEntity) = with(binding) {
             root.setOnClickListener {
                 val toDoEntity = showDetailToDoDialog(data, adapterPosition)
                 toDoItemClickListener(toDoEntity)
             }
 
             checkBox.setOnClickListener {
-                toDoItemCheckListener(
-                    data.copy(isChecked = binding.checkBox.isChecked)
-                )
-                checkToDoComplete(binding.checkBox.isChecked)
+                val updateToDoEntity = data.copy(isChecked = checkBox.isChecked)
+                toDoList.set(adapterPosition, updateToDoEntity)
+                notifyItemChanged(adapterPosition)
+                toDoItemCheckListener(updateToDoEntity)
             }
 
             deleteToDoItemButton.setOnClickListener {
@@ -56,10 +56,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
             if (editMode) deleteToDoItemButton.toVisible()
             else deleteToDoItemButton.toGone()
         }
-
-        private fun checkToDoComplete(isChecked: Boolean) = with(binding) {
-            checkBox.isChecked = isChecked
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ToDoItemViewHolder {
@@ -69,7 +65,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
 
     override fun onBindViewHolder(holder: HomeAdapter.ToDoItemViewHolder, position: Int) {
         holder.bindData(toDoList[position])
-        holder.bindViews(toDoList[position], position)
+        holder.bindViews(toDoList[position])
     }
 
     override fun getItemCount(): Int = toDoList.size
@@ -97,7 +93,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ToDoItemViewHolder>() {
     private fun showDetailToDoDialog(data: ToDoEntity, position: Int): ToDoEntity {
         var updateToDoEntity = data.copy()
         DetailToDoDialog(context, data) {
-            Log.d("date", it.createdAt)
             updateToDoEntity = it
             toDoList.set(position, it)
             notifyItemChanged(position)
