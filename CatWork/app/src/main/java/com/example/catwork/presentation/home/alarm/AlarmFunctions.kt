@@ -47,5 +47,16 @@ class AlarmFunctions(private val context: Context) {
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
     }
 
-    
+    fun cancelAlarm(alarm_code: Int) {
+        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+
+        pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(context, alarm_code, intent, PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(context, alarm_code, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+        alarmManager.cancel(pendingIntent)
+    }
 }
