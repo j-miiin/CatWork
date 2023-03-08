@@ -10,13 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.ext.*
+import com.example.catwork.presentation.home.alarm.AlarmFunctions
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
 import kotlin.collections.ArrayList
 
 
-class HomeFragment : ScopeFragment(), HomeContract.View {
+class HomeFragment(
+    val alarmFunctions: AlarmFunctions
+) : ScopeFragment(), HomeContract.View {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -154,5 +157,9 @@ class HomeFragment : ScopeFragment(), HomeContract.View {
                     presenter.deleteToDoItem(it.id)
                 })
         }
+    }
+
+    private fun setAlarm(time: String, alarmCode: Int, content: String) {
+        alarmFunctions.callAlarm(time, alarmCode, content)
     }
 }
