@@ -162,4 +162,8 @@ class HomeFragment(
     private fun setAlarm(time: String, alarmCode: Int, content: String) {
         alarmFunctions.callAlarm(time, alarmCode, content)
     }
+
+    private fun getAlarmTime(toDoEntity: ToDoEntity) {
+        val day = toDoEntity.createdAt
+    }
 }

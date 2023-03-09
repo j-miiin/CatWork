@@ -16,8 +16,6 @@ class AlarmFunctions(private val context: Context) {
 
     private lateinit var pendingIntent: PendingIntent
 
-    private val ioScope by lazy { CoroutineScope(Dispatchers.IO) }
-
     fun callAlarm(time: String, alarm_code: Int, content: String) {
 
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -33,7 +31,7 @@ class AlarmFunctions(private val context: Context) {
             PendingIntent.getBroadcast(context, alarm_code, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd H:mm")
         var dateTime = Date()
         try {
             dateTime = dateFormat.parse(time) as Date
