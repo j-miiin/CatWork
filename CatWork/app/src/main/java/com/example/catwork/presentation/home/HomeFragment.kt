@@ -63,6 +63,7 @@ class HomeFragment(
         addToDoItemButton.setOnClickListener {
             AddToDoDialog(requireContext(), getSelectedDateString(selectedYear, selectedMonth, selectedDay)) {
                 presenter.addToDoItem(it)
+                setAlarm(it.dueTo, it.id, it.title)
             }.show()
         }
 
@@ -134,6 +135,7 @@ class HomeFragment(
         binding.progressBar.toGone()
     }
 
+
     override fun showErrorDescription(message: String) {
         binding.recyclerView.toGone()
         binding.errorDescriptionTextView.toVisible()
@@ -159,7 +161,7 @@ class HomeFragment(
         }
     }
 
-    private fun setAlarm(time: String, alarmCode: Int, content: String) {
+    private fun setAlarm(time: String, alarmCode: String, content: String) {
         alarmFunctions.callAlarm(time, alarmCode, content)
     }
 
