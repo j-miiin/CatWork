@@ -31,7 +31,7 @@ class AlarmFunctions(private val context: Context) {
             PendingIntent.getBroadcast(context, alarm_code, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd H:mm")
+        val dateFormat = SimpleDateFormat("yyyyMMdd H:mm")
         var dateTime = Date()
         try {
             dateTime = dateFormat.parse(time) as Date

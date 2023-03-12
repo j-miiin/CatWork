@@ -17,9 +17,7 @@ import org.koin.androidx.scope.ScopeFragment
 import kotlin.collections.ArrayList
 
 
-class HomeFragment(
-    val alarmFunctions: AlarmFunctions
-) : ScopeFragment(), HomeContract.View {
+class HomeFragment: ScopeFragment(), HomeContract.View {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -28,6 +26,8 @@ class HomeFragment(
     private var selectedDay = 0
 
     private var editMode = false
+
+    private val alarmFunctions = AlarmFunctions(requireContext())
 
     override val presenter: HomeContract.Presenter by inject()
 
@@ -63,7 +63,7 @@ class HomeFragment(
         addToDoItemButton.setOnClickListener {
             AddToDoDialog(requireContext(), getSelectedDateString(selectedYear, selectedMonth, selectedDay)) {
                 presenter.addToDoItem(it)
-                setAlarm(it.dueTo, it.id, it.title)
+                setAlarm(it.createdAt, it.dueTo, (1..100000).random(), it.title)
             }.show()
         }
 
@@ -161,11 +161,8 @@ class HomeFragment(
         }
     }
 
-    private fun setAlarm(time: String, alarmCode: String, content: String) {
-        alarmFunctions.callAlarm(time, alarmCode, content)
-    }
-
-    private fun getAlarmTime(toDoEntity: ToDoEntity) {
-        val day = toDoEntity.createdAt
+    private fun setAlarm(date: String, time: String, alarmCode: Int, content: String) {
+        val alarmTime = "$date $time"
+        alarmFunctions.callAlarm(alarmTime, alarmCode, content)
     }
 }
