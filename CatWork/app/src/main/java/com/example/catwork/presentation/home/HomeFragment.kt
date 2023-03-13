@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.ext.*
-import com.example.catwork.presentation.home.alarm.AlarmFunctions
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
@@ -26,8 +25,6 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
     private var selectedDay = 0
 
     private var editMode = false
-
-    private val alarmFunctions = AlarmFunctions(requireContext())
 
     override val presenter: HomeContract.Presenter by inject()
 
@@ -63,7 +60,6 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         addToDoItemButton.setOnClickListener {
             AddToDoDialog(requireContext(), getSelectedDateString(selectedYear, selectedMonth, selectedDay)) {
                 presenter.addToDoItem(it)
-                setAlarm(it.createdAt, it.dueTo, (1..100000).random(), it.title)
             }.show()
         }
 
@@ -159,10 +155,5 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
                     presenter.deleteToDoItem(it.id)
                 })
         }
-    }
-
-    private fun setAlarm(date: String, time: String, alarmCode: Int, content: String) {
-        val alarmTime = "$date $time"
-        alarmFunctions.callAlarm(alarmTime, alarmCode, content)
     }
 }

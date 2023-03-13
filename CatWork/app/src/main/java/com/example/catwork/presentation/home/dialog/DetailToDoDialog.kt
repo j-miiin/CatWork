@@ -23,9 +23,9 @@ class DetailToDoDialog(
     private lateinit var binding: DialogDetailTodoBinding
 
     private var editMode = false
-    private var alarmMode = false
-    private var alarmHour = 0
-    private var alarmMinute = 0
+//    private var alarmMode = false
+//    private var alarmHour = 0
+//    private var alarmMinute = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,40 +42,40 @@ class DetailToDoDialog(
         titleEditText.setText(toDoEntity.title)
         contentEditText.setText(toDoEntity.content)
 
-        if (toDoEntity.dueTo.isNotEmpty()) alarmMode = true
+//        if (toDoEntity.dueTo.isNotEmpty()) alarmMode = true
 
-        initTime()
+//        initTime()
 
-        alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            alarmMode = isChecked
-            if (alarmMode) alarmTimePicker.toVisible()
-            else alarmTimePicker.toGone()
-        }
-
-        alarmTimePicker.setOnTimeChangedListener { _, hour, minute ->
-            alarmHour = hour
-            alarmMinute = minute
-        }
+//        alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
+//            alarmMode = isChecked
+//            if (alarmMode) alarmTimePicker.toVisible()
+//            else alarmTimePicker.toGone()
+//        }
+//
+//        alarmTimePicker.setOnTimeChangedListener { _, hour, minute ->
+//            alarmHour = hour
+//            alarmMinute = minute
+//        }
 
         editButton.setOnClickListener {
             editMode = !editMode
             if (editMode) {
                 titleEditText.isFocusableInTouchMode = true
                 contentEditText.isFocusableInTouchMode = true
-                alarmCheckBox.toVisible()
-                alarmCheckBox.isChecked = alarmMode
-                if (alarmMode) {
-                    alarmTimePicker.toVisible()
-                    setTimePickerValue(alarmHour, alarmMinute)
-                }
+//                alarmCheckBox.toVisible()
+//                alarmCheckBox.isChecked = alarmMode
+//                if (alarmMode) {
+//                    alarmTimePicker.toVisible()
+//                    setTimePickerValue(alarmHour, alarmMinute)
+//                }
             } else {
                 hideKeyboard()
                 titleEditText.isFocusableInTouchMode = false
                 titleEditText.isFocusable = false
                 contentEditText.isFocusableInTouchMode = false
                 contentEditText.isFocusable = false
-                alarmCheckBox.toGone()
-                alarmTimePicker.toGone()
+//                alarmCheckBox.toGone()
+//                alarmTimePicker.toGone()
             }
         }
 
@@ -91,7 +91,7 @@ class DetailToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = toDoEntity.isChecked,
-                        dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
+//                        dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
                         createdAt = toDoEntity.createdAt
                     )
                 )
@@ -100,27 +100,27 @@ class DetailToDoDialog(
         }
     }
 
-    private fun initTime() {
-        if (toDoEntity.dueTo.isNotEmpty()) {
-            val time = toDoEntity.dueTo.split(":")
-            alarmHour = time[0].toInt()
-            alarmMinute = time[1].toInt()
-        }
-    }
-
-    private fun setTimePickerValue(hour: Int, minute: Int) {
-        binding.alarmTimePicker.hour = hour
-        binding.alarmTimePicker.minute = minute
-    }
-
-    private fun getTimePickerValue(): String {
-        val hour = binding.alarmTimePicker.hour
-        val minute = binding.alarmTimePicker.minute
-        return "${hour}:${minute}"
-    }
-
     private fun hideKeyboard() {
         val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
+
+//    private fun initTime() {
+//        if (toDoEntity.dueTo.isNotEmpty()) {
+//            val time = toDoEntity.dueTo.split(":")
+//            alarmHour = time[0].toInt()
+//            alarmMinute = time[1].toInt()
+//        }
+//    }
+//
+//    private fun setTimePickerValue(hour: Int, minute: Int) {
+//        binding.alarmTimePicker.hour = hour
+//        binding.alarmTimePicker.minute = minute
+//    }
+//
+//    private fun getTimePickerValue(): String {
+//        val hour = binding.alarmTimePicker.hour
+//        val minute = binding.alarmTimePicker.minute
+//        return "${hour}:${minute}"
+//    }
 }

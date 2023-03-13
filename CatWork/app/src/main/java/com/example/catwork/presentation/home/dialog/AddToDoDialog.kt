@@ -44,12 +44,12 @@ class AddToDoDialog(
 
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            hideKeyboard()
-            alarmMode = isChecked
-            if (isChecked) alarmTimePicker.toVisible()
-            else alarmTimePicker.toGone()
-        }
+//        alarmCheckBox.setOnCheckedChangeListener { _, isChecked ->
+//            hideKeyboard()
+//            alarmMode = isChecked
+//            if (isChecked) alarmTimePicker.toVisible()
+//            else alarmTimePicker.toGone()
+//        }
 
         addToDoButton.setOnClickListener {
             if (titleEditText.text.isNullOrBlank()) {
@@ -61,7 +61,7 @@ class AddToDoDialog(
                         title = titleEditText.text.toString(),
                         content = contentEditText.text.toString(),
                         isChecked = false,
-                        dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
+//                        dueTo = if (alarmMode) getTimePickerValue() else "",    // TimePicker에서 설정한 시간
                         createdAt = selectedDate
                     )
                 )
@@ -74,14 +74,9 @@ class AddToDoDialog(
         }
     }
 
-    private fun getTimePickerValue(): String {
-        val hour = binding.alarmTimePicker.hour
-        val minute = binding.alarmTimePicker.minute
-        return "${hour}:${minute}"
-    }
-
-    private fun hideKeyboard() {
-        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-    }
+//    private fun getTimePickerValue(): String {
+//        val hour = binding.alarmTimePicker.hour
+//        val minute = binding.alarmTimePicker.minute
+//        return "${hour}:${minute}"
+//    }
 }
