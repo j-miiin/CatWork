@@ -68,6 +68,16 @@
             app:layout_constraintStart_toEndOf="@id/dateTextView"
             app:layout_constraintTop_toTopOf="@id/dateTextView" />
 
+        <Button
+            android:id="@+id/recordButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_baseline_create_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
