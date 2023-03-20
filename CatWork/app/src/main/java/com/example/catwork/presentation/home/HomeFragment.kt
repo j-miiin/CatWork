@@ -42,6 +42,11 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         presenter.onViewCreated()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
+    }
+
     private fun initViews() = with(binding) {
 
         val dateInfo = getTodayDate()
@@ -79,7 +84,7 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         }
 
         yesterdayButton.setOnClickListener {
-            val yesterdayDateInfo = getYesterdayDate(selectedYear, selectedMonth-1, selectedDay)
+            val yesterdayDateInfo = getLastOrNextMonthOrDay(selectedYear, selectedMonth-1, selectedDay, true, false)
             selectedYear = yesterdayDateInfo[0]
             selectedMonth = yesterdayDateInfo[1] + 1
             selectedDay = yesterdayDateInfo[2]
@@ -91,7 +96,7 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         }
 
         tomorrowDayButton.setOnClickListener {
-            val tomorrowDateInfo = getTomorrowDate(selectedYear, selectedMonth-1, selectedDay)
+            val tomorrowDateInfo = getLastOrNextMonthOrDay(selectedYear, selectedMonth-1, selectedDay, false, false)
             selectedYear = tomorrowDateInfo[0]
             selectedMonth = tomorrowDateInfo[1] + 1
             selectedDay = tomorrowDateInfo[2]
@@ -116,11 +121,6 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         }
 
         DatePickerDialog(requireContext(), dateSetListener, selectedYear, selectedMonth-1, selectedDay).show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
     }
 
     override fun showLoadingIndicator() {

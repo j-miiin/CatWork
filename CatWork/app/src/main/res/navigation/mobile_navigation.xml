@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.catwork.presentation.mypage.MyPageFragment"
+        android:name="com.example.catwork.presentation.mypage.CalendarFragment"
         android:label="@string/title_mypage"
-        tools:layout="@layout/fragment_mypage" />
+        tools:layout="@layout/fragment_calendar" />
 
 </navigation>

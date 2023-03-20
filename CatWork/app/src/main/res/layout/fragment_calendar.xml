@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
-    tools:context=".presentation.mypage.MyPageFragment">
+    tools:context=".presentation.mypage.CalendarFragment">
 
     <TextView
         android:id="@+id/yearTextView"
@@ -34,6 +34,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/yearTextView"
         tools:text="3월" />
+
+    <Button
+        android:id="@+id/lastMonthButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_baseline_keyboard_arrow_left_24"
+        app:layout_constraintBottom_toBottomOf="@id/monthTextView"
+        app:layout_constraintEnd_toStartOf="@id/monthTextView"
+        app:layout_constraintTop_toTopOf="@id/monthTextView" />
+
+    <Button
+        android:id="@+id/nextMonthDayButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+        app:layout_constraintBottom_toBottomOf="@id/monthTextView"
+        app:layout_constraintStart_toEndOf="@id/monthTextView"
+        app:layout_constraintTop_toTopOf="@id/monthTextView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/weekContainer"
@@ -160,5 +180,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weekContainer" />
+
+    <TextView
+        android:id="@+id/errorDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="30sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/error_description"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

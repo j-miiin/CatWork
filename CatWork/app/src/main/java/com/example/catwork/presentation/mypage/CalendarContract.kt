@@ -1,10 +1,9 @@
 package com.example.catwork.presentation.mypage
 
-import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.presentation.BasePresenter
 import com.example.catwork.presentation.BaseView
 
-interface MyPageContract {
+interface CalendarContract {
 
     interface View : BaseView<Presenter> {
 

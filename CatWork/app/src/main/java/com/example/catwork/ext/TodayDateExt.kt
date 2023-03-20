@@ -41,26 +41,16 @@ fun getSelectedDateString(year: Int, month: Int, day: Int): String {
     return dateStr
 }
 
-fun getYesterdayDate(selectedYear: Int, selectedMonth: Int, selectedDay: Int): List<Int> {
+fun getLastOrNextMonthOrDay(selectedYear: Int, selectedMonth: Int, selectedDay: Int, isLast: Boolean, isMonth: Boolean): List<Int> {
     val calendar = Calendar.getInstance()
     calendar.set(Calendar.YEAR, selectedYear)
     calendar.set(Calendar.MONTH, selectedMonth)
     calendar.set(Calendar.DAY_OF_MONTH, selectedDay)
-    calendar.add(Calendar.DATE, -1)
 
-    val year = calendar.get(Calendar.YEAR)
-    val month = calendar.get(Calendar.MONTH)
-    val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-    return listOf(year, month, day)
-}
-
-fun getTomorrowDate(selectedYear: Int, selectedMonth: Int, selectedDay: Int): List<Int> {
-    val calendar = Calendar.getInstance()
-    calendar.set(Calendar.YEAR, selectedYear)
-    calendar.set(Calendar.MONTH, selectedMonth)
-    calendar.set(Calendar.DAY_OF_MONTH, selectedDay)
-    calendar.add(Calendar.DATE, 1)
+    if (isLast && isMonth) calendar.add(Calendar.MONTH, -1)  // 이전달
+    else if (!isLast && isMonth) calendar.add(Calendar.MONTH, 1)    // 다음달
+    else if (isLast && !isMonth) calendar.add(Calendar.DATE, -1)    // 이전날
+    else calendar.add(Calendar.DATE, 1)    // 다음날
 
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
