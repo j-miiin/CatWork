@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catwork.databinding.FragmentCalendarBinding
-import com.example.catwork.ext.getTodayDate
-import com.example.catwork.ext.toGone
-import com.example.catwork.ext.toVisible
+import com.example.catwork.ext.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
-import java.time.LocalDate
+import java.util.Calendar
 
 class CalendarFragment : ScopeFragment(), CalendarContract.View {
 
@@ -52,11 +51,32 @@ class CalendarFragment : ScopeFragment(), CalendarContract.View {
         monthTextView.text = "${selectedMonth}월"
 
         lastMonthButton.setOnClickListener {
+            val lastMonthDateInfo = getLastOrNextMonthOrDay(selectedYear, selectedMonth-1, selectedDay, true, true)
+            selectedYear = lastMonthDateInfo[0]
+            selectedMonth = lastMonthDateInfo[1] + 1
+            selectedDay = lastMonthDateInfo[2]
 
+            binding.yearTextView.text = "${selectedYear}년"
+            binding.monthTextView.text = "${selectedMonth}월"
+
+            presenter.fetchCalendarRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
 
         nextMonthDayButton.setOnClickListener {
+            val nextMonthDateInfo = getLastOrNextMonthOrDay(selectedYear, selectedMonth-1, selectedDay, false, true)
+            selectedYear = nextMonthDateInfo[0]
+            selectedMonth = nextMonthDateInfo[1] + 1
+            selectedDay = nextMonthDateInfo[2]
 
+            binding.yearTextView.text = "${selectedYear}년"
+            binding.monthTextView.text = "${selectedMonth}월"
+
+            presenter.fetchCalendarRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+        }
+
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 7)
+            adapter = CalendarAdapter()
         }
     }
 
@@ -75,6 +95,32 @@ class CalendarFragment : ScopeFragment(), CalendarContract.View {
     }
 
     override fun showCalendarRecord() {
+        binding.recyclerView.toVisible()
+        binding.errorDescriptionTextView.toGone()
+        (binding.recyclerView.adapter as CalendarAdapter).run {
+            setDayList(
+                getDayList(),
+                dayCellClickListener = {
 
+                }
+            )
+        }
+    }
+
+    private fun getDayList(): ArrayList<String> {
+        var dayList = ArrayList<String>()
+
+        val calendar = Calendar.getInstance()
+        calendar.set(selectedYear, selectedMonth, selectedDay)
+        val lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        calendar.set(selectedYear, selectedMonth, 1)
+        val firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+        for (i in 1..41) {
+            if (i <= firstDayOfWeek || i > (lastDay + firstDayOfWeek)) dayList.add("")
+            else dayList.add((i - firstDayOfWeek).toString())
+        }
+
+        return dayList
     }
 }

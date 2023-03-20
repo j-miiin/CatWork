@@ -40,6 +40,6 @@ val appModule = module {
     }
 
     scope<CalendarFragment> {
-        scoped<CalendarContract.Presenter> { CalendarPresenter() }
+        scoped<CalendarContract.Presenter> { CalendarPresenter(get()) }
     }
 }
