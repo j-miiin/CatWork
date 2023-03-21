@@ -26,6 +26,8 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
 
     private var editMode = false
 
+    private var feeling = 0
+
     override val presenter: HomeContract.Presenter by inject()
 
     override fun onCreateView(
@@ -105,6 +107,11 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
             binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
 
             presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+        }
+
+        recordButton.setOnClickListener {
+            feeling = (feeling++) % 7
+            val resId = context.resources.getIdentifier()
         }
     }
 

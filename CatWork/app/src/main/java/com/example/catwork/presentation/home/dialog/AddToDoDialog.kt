@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.databinding.DialogAddTodoBinding
+import com.example.catwork.domain.Emoji
 import com.example.catwork.ext.getRandomID
 import com.example.catwork.ext.getTodayDateString
 import com.example.catwork.ext.toGone
