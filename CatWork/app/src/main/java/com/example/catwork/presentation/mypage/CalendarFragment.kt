@@ -1,6 +1,7 @@
 package com.example.catwork.presentation.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -111,14 +112,21 @@ class CalendarFragment : ScopeFragment(), CalendarContract.View {
         var dayList = ArrayList<String>()
 
         val calendar = Calendar.getInstance()
-        calendar.set(selectedYear, selectedMonth, selectedDay)
+        calendar.set(selectedYear, selectedMonth-1, 1)
         val lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-        calendar.set(selectedYear, selectedMonth, 1)
         val firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
 
-        for (i in 1..41) {
-            if (i <= firstDayOfWeek || i > (lastDay + firstDayOfWeek)) dayList.add("")
-            else dayList.add((i - firstDayOfWeek).toString())
+        for (i in 1..42) {
+            if (i < firstDayOfWeek || i >= (lastDay + firstDayOfWeek)) dayList.add("")
+            else dayList.add((i - firstDayOfWeek + 1).toString())
+        }
+
+        var check = true
+        for (i in 35..41) {
+            if (dayList[i] != "") check = false
+        }
+        if (check) {
+            for (i in 1..7) dayList.removeLast()
         }
 
         return dayList
