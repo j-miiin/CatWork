@@ -68,13 +68,15 @@
             app:layout_constraintStart_toEndOf="@id/dateTextView"
             app:layout_constraintTop_toTopOf="@id/dateTextView" />
 
-        <Button
+        <ImageButton
             android:id="@+id/recordButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_baseline_create_24"
+            android:src="@drawable/ic_none"
+            android:background="@null"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

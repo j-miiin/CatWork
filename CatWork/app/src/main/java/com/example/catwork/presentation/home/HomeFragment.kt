@@ -2,13 +2,16 @@ package com.example.catwork.presentation.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.catwork.R
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
+import com.example.catwork.domain.Emoji
 import com.example.catwork.ext.*
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
 import org.koin.android.ext.android.inject
@@ -110,8 +113,9 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         }
 
         recordButton.setOnClickListener {
-            feeling = (feeling++) % 7
-            val resId = context.resources.getIdentifier()
+            feeling = (feeling + 1) % 7
+            Log.d("feeling", feeling.toString())
+            changeFeelingState()
         }
     }
 
@@ -128,6 +132,19 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         }
 
         DatePickerDialog(requireContext(), dateSetListener, selectedYear, selectedMonth-1, selectedDay).show()
+    }
+
+    private fun changeFeelingState() {
+        when (feeling) {
+            1 -> binding.recordButton.setImageResource(R.drawable.ic_perfect)
+            2 -> binding.recordButton.setImageResource(R.drawable.ic_good)
+            3 -> binding.recordButton.setImageResource(R.drawable.ic_soso)
+            4 -> binding.recordButton.setImageResource(R.drawable.ic_bad)
+            5 -> binding.recordButton.setImageResource(R.drawable.ic_sad)
+            6 -> binding.recordButton.setImageResource(R.drawable.ic_tired)
+            7 -> binding.recordButton.setImageResource(R.drawable.ic_sick)
+            0 -> binding.recordButton.setImageResource(R.drawable.ic_none)
+        }
     }
 
     override fun showLoadingIndicator() {
