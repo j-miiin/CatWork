@@ -8,5 +8,6 @@ data class DayRecordEntity(
     @PrimaryKey val id: String,
     val year: Int,
     val month: Int,
-    val day: Int
+    val day: Int,
+    val feeling: Int
 )

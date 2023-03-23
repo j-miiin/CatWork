@@ -6,5 +6,7 @@ interface DayRecordRepository {
 
     suspend fun getDayRecordList(year: Int, month: Int): List<DayRecordEntity>
 
+    suspend fun getDayRecord(id: String): DayRecordEntity
+
     suspend fun addDayRecord(dayRecordEntity: DayRecordEntity)
 }

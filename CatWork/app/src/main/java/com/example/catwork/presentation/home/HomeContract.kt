@@ -1,5 +1,6 @@
 package com.example.catwork.presentation.home
 
+import com.example.catwork.data.entity.DayRecordEntity
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.presentation.BasePresenter
 import com.example.catwork.presentation.BaseView
@@ -26,5 +27,9 @@ interface HomeContract {
         fun updateToDoItem(toDoEntity: ToDoEntity)
 
         fun deleteToDoItem(id: String)
+
+        fun fetchDayRecord(id: String)
+
+        fun addDayRecord(dayRecordEntity: DayRecordEntity)
     }
 }

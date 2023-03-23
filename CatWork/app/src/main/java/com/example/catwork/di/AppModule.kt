@@ -35,10 +35,11 @@ val appModule = module {
     factory { UpdateToDoUseCase(get()) }
     factory { DeleteToDoUseCase(get()) }
     factory { GetDayRecordListUseCase(get()) }
+    factory { AddDayRecordUseCase(get()) }
 
     // Presentation
     scope<HomeFragment> {
-        scoped<HomeContract.Presenter> { HomePresenter(get(), get(), get(), get(), get()) }
+        scoped<HomeContract.Presenter> { HomePresenter(get(), get(), get(), get(), get(), get(), get()) }
     }
 
     scope<CalendarFragment> {

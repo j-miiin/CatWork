@@ -11,6 +11,9 @@ interface DayRecordDao {
     @Query("SELECT * FROM DayRecordEntity WHERE year=:year AND month=:month")
     suspend fun getAll(year: Int, month: Int): List<DayRecordEntity>
 
+    @Query("SELECT * FROM DayRecordEntity WHERE id=:id")
+    suspend fun get(id: String): DayRecordEntity
+
     @Insert
     suspend fun insert(dayRecordEntity: DayRecordEntity)
 }

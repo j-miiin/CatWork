@@ -2,11 +2,9 @@ package com.example.catwork.presentation.home
 
 import android.util.Log
 import com.example.catwork.R
+import com.example.catwork.data.entity.DayRecordEntity
 import com.example.catwork.data.entity.ToDoEntity
-import com.example.catwork.domain.usecase.AddToDoUseCase
-import com.example.catwork.domain.usecase.DeleteToDoUseCase
-import com.example.catwork.domain.usecase.GetToDoListUseCase
-import com.example.catwork.domain.usecase.UpdateToDoUseCase
+import com.example.catwork.domain.usecase.*
 import com.example.catwork.ext.getTodayDate
 import com.example.catwork.ext.getTodayDateString
 import kotlinx.coroutines.CoroutineScope
@@ -19,13 +17,16 @@ class HomePresenter(
     private val getToDoListUseCase: GetToDoListUseCase,
     private val addToDoUseCase: AddToDoUseCase,
     private val updateToDoUseCase: UpdateToDoUseCase,
-    private val deleteToDoUseCase: DeleteToDoUseCase
+    private val deleteToDoUseCase: DeleteToDoUseCase,
+    private val getDayRecordUseCase: GetDayRecordUseCase,
+    private val addDayRecordUseCase: AddDayRecordUseCase
 ) : HomeContract.Presenter {
 
     override val scope: CoroutineScope = MainScope()
 
     override fun onViewCreated() {
         fetchToDoList(getTodayDateString())
+        fetchDayRecord(getTodayDateString())
     }
 
     override fun onDestroyView() { }
@@ -65,6 +66,18 @@ class HomePresenter(
     override fun deleteToDoItem(id: String) {
         scope.launch {
             deleteToDoUseCase(id)
+        }
+    }
+
+    override fun fetchDayRecord(id: String) {
+        scope.launch {
+
+        }
+    }
+
+    override fun addDayRecord(dayRecordEntity: DayRecordEntity) {
+        scope.launch {
+
         }
     }
 }
