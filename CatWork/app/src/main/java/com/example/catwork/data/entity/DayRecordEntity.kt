@@ -9,5 +9,5 @@ data class DayRecordEntity(
     val year: Int,
     val month: Int,
     val day: Int,
-    val feeling: Int
+    val feeling: Int = 0
 )

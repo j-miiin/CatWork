@@ -5,5 +5,5 @@ import com.example.catwork.data.repository.DayRecordRepository
 
 class GetDayRecordUseCase(private val dayRecordRepository: DayRecordRepository) {
 
-    suspend operator fun invoke(id: String): DayRecordEntity = dayRecordRepository.getDayRecord(id)
+    suspend operator fun invoke(id: String): DayRecordEntity? = dayRecordRepository.getDayRecord(id)
 }

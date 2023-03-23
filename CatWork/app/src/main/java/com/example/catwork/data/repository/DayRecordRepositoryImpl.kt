@@ -21,4 +21,8 @@ class DayRecordRepositoryImpl(
     override suspend fun addDayRecord(dayRecordEntity: DayRecordEntity) = withContext(dispatcher) {
         dayRecordDao.insert(dayRecordEntity)
     }
+
+    override suspend fun updateDayRecord(dayRecordEntity: DayRecordEntity) = withContext(dispatcher) {
+        dayRecordDao.update(dayRecordEntity)
+    }
 }

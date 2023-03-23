@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catwork.R
+import com.example.catwork.data.entity.DayRecordEntity
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
 import com.example.catwork.domain.Emoji
@@ -22,6 +23,8 @@ import kotlin.collections.ArrayList
 class HomeFragment: ScopeFragment(), HomeContract.View {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private lateinit var dayRecordEntity: DayRecordEntity
 
     private var selectedYear = 0
     private var selectedMonth = 0
@@ -61,6 +64,8 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
 
         yearTextView.text = "${selectedYear}년"
         dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
+
+        presenter.fetchDayRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -114,8 +119,8 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
 
         recordButton.setOnClickListener {
             feeling = (feeling + 1) % 7
-            Log.d("feeling", feeling.toString())
             changeFeelingState()
+            val updateDayRecordEntity =
         }
     }
 
@@ -179,5 +184,11 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
                     presenter.deleteToDoItem(it.id)
                 })
         }
+    }
+
+    override fun showDayRecord(dayRecordEntity: DayRecordEntity) {
+        this.dayRecordEntity = dayRecordEntity
+        feeling = dayRecordEntity.feeling
+        changeFeelingState()
     }
 }

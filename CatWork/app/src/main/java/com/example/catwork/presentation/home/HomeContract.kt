@@ -16,6 +16,8 @@ interface HomeContract {
         fun showErrorDescription(message: String)
 
         fun showToDoList(toDoList: List<ToDoEntity>)
+
+        fun showDayRecord(dayRecordEntity: DayRecordEntity)
     }
 
     interface Presenter : BasePresenter {
@@ -31,5 +33,7 @@ interface HomeContract {
         fun fetchDayRecord(id: String)
 
         fun addDayRecord(dayRecordEntity: DayRecordEntity)
+
+        fun updateDayRecord(dayRecordEntity: DayRecordEntity)
     }
 }

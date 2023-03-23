@@ -9,4 +9,6 @@ interface DayRecordRepository {
     suspend fun getDayRecord(id: String): DayRecordEntity
 
     suspend fun addDayRecord(dayRecordEntity: DayRecordEntity)
+
+    suspend fun updateDayRecord(dayRecordEntity: DayRecordEntity)
 }

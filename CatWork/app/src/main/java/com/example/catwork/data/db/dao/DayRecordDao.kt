@@ -3,6 +3,7 @@ package com.example.catwork.data.db.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.catwork.data.entity.DayRecordEntity
 
 @Dao
@@ -16,4 +17,7 @@ interface DayRecordDao {
 
     @Insert
     suspend fun insert(dayRecordEntity: DayRecordEntity)
+
+    @Update
+    suspend fun update(dayRecordEntity: DayRecordEntity)
 }

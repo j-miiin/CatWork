@@ -19,7 +19,8 @@ class HomePresenter(
     private val updateToDoUseCase: UpdateToDoUseCase,
     private val deleteToDoUseCase: DeleteToDoUseCase,
     private val getDayRecordUseCase: GetDayRecordUseCase,
-    private val addDayRecordUseCase: AddDayRecordUseCase
+    private val addDayRecordUseCase: AddDayRecordUseCase,
+    private val updateDayRecordUseCase: UpdateDayRecordUseCase
 ) : HomeContract.Presenter {
 
     override val scope: CoroutineScope = MainScope()
@@ -71,13 +72,27 @@ class HomePresenter(
 
     override fun fetchDayRecord(id: String) {
         scope.launch {
-
+            var dayRecordEntity = getDayRecordUseCase(id)
+            if (dayRecordEntity == null) {
+                val year = (id.substring(0 until 4)).toInt()
+                val month = (id.substring(4 until 6)).toInt()
+                val day = (id.substring(6)).toInt()
+                dayRecordEntity = DayRecordEntity(id, year, month, day, 0)
+                addDayRecordUseCase(dayRecordEntity)
+            }
+            view.showDayRecord(dayRecordEntity)
         }
     }
 
     override fun addDayRecord(dayRecordEntity: DayRecordEntity) {
         scope.launch {
+            addDayRecordUseCase(dayRecordEntity)
+        }
+    }
 
+    override fun updateDayRecord(dayRecordEntity: DayRecordEntity) {
+        scope.launch {
+            updateDayRecordUseCase(dayRecordEntity)
         }
     }
 }
