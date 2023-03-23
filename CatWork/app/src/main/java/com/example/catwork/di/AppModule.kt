@@ -1,12 +1,11 @@
 package com.example.catwork.di
 
 import com.example.catwork.data.db.ToDoDatabase
+import com.example.catwork.data.repository.DayRecordRepository
+import com.example.catwork.data.repository.DayRecordRepositoryImpl
 import com.example.catwork.data.repository.ToDoItemRepository
 import com.example.catwork.data.repository.ToDoItemRepositoryImpl
-import com.example.catwork.domain.usecase.AddToDoUseCase
-import com.example.catwork.domain.usecase.DeleteToDoUseCase
-import com.example.catwork.domain.usecase.GetToDoListUseCase
-import com.example.catwork.domain.usecase.UpdateToDoUseCase
+import com.example.catwork.domain.usecase.*
 import com.example.catwork.presentation.home.HomeContract
 import com.example.catwork.presentation.home.HomeFragment
 import com.example.catwork.presentation.home.HomePresenter
@@ -24,15 +23,18 @@ val appModule = module {
 
     single { ToDoDatabase.build(androidApplication())}
     single { get<ToDoDatabase>().toDoDao() }
+    single { get<ToDoDatabase>().dayRecordDao() }
 
     // Repository
     single<ToDoItemRepository> { ToDoItemRepositoryImpl(get(), get()) }
+    single<DayRecordRepository> { DayRecordRepositoryImpl(get(), get()) }
 
     // UseCase
     factory { GetToDoListUseCase(get()) }
     factory { AddToDoUseCase(get()) }
     factory { UpdateToDoUseCase(get()) }
     factory { DeleteToDoUseCase(get()) }
+    factory { GetDayRecordListUseCase(get()) }
 
     // Presentation
     scope<HomeFragment> {
