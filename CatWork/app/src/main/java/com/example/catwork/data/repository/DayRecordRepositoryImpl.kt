@@ -13,4 +13,8 @@ class DayRecordRepositoryImpl(
     override suspend fun getDayRecordList(year: Int, month: Int): List<DayRecordEntity> = withContext(dispatcher) {
         dayRecordDao.getAll(year, month)
     }
+
+    override suspend fun addDayRecord(dayRecordEntity: DayRecordEntity) {
+        dayRecordDao.insert(dayRecordEntity)
+    }
 }
