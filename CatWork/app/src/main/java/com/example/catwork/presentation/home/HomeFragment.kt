@@ -120,7 +120,8 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         recordButton.setOnClickListener {
             feeling = (feeling + 1) % 7
             changeFeelingState()
-            val updateDayRecordEntity =
+            val updateDayRecordEntity = dayRecordEntity.copy(feeling = feeling)
+            presenter.updateDayRecord(updateDayRecordEntity)
         }
     }
 
