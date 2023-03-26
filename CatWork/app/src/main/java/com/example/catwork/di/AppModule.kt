@@ -35,8 +35,9 @@ val appModule = module {
     factory { UpdateToDoUseCase(get()) }
     factory { DeleteToDoUseCase(get()) }
     factory { GetDayRecordListUseCase(get()) }
+    factory { GetDayRecordUseCase(get()) }
     factory { AddDayRecordUseCase(get()) }
-    factory { UpdateToDoUseCase(get()) }
+    factory { UpdateDayRecordUseCase(get()) }
 
     // Presentation
     scope<HomeFragment> {

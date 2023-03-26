@@ -14,7 +14,7 @@ class DayRecordRepositoryImpl(
         dayRecordDao.getAll(year, month)
     }
 
-    override suspend fun getDayRecord(id: String): DayRecordEntity = withContext(dispatcher) {
+    override suspend fun getDayRecord(id: String): DayRecordEntity? = withContext(dispatcher) {
         dayRecordDao.get(id)
     }
 
