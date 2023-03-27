@@ -9,9 +9,9 @@ import com.example.catwork.domain.usecase.*
 import com.example.catwork.presentation.home.HomeContract
 import com.example.catwork.presentation.home.HomeFragment
 import com.example.catwork.presentation.home.HomePresenter
-import com.example.catwork.presentation.mypage.CalendarContract
-import com.example.catwork.presentation.mypage.CalendarFragment
-import com.example.catwork.presentation.mypage.CalendarPresenter
+import com.example.catwork.presentation.calendar.CalendarContract
+import com.example.catwork.presentation.calendar.CalendarFragment
+import com.example.catwork.presentation.calendar.CalendarPresenter
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
@@ -34,7 +34,6 @@ val appModule = module {
     factory { AddToDoUseCase(get()) }
     factory { UpdateToDoUseCase(get()) }
     factory { DeleteToDoUseCase(get()) }
-    factory { GetDayRecordListUseCase(get()) }
     factory { GetDayRecordUseCase(get()) }
     factory { AddDayRecordUseCase(get()) }
     factory { UpdateDayRecordUseCase(get()) }
@@ -45,6 +44,6 @@ val appModule = module {
     }
 
     scope<CalendarFragment> {
-        scoped<CalendarContract.Presenter> { CalendarPresenter(get()) }
+        scoped<CalendarContract.Presenter> { CalendarPresenter(get(), get()) }
     }
 }

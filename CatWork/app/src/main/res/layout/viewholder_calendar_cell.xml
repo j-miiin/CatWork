@@ -19,4 +19,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="10" />
 
+    <ImageButton
+        android:id="@+id/recordButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dayTextView"
+        tools:src="@drawable/ic_perfect" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

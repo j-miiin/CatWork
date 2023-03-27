@@ -1,11 +1,12 @@
-package com.example.catwork.presentation.mypage
+package com.example.catwork.presentation.calendar
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.catwork.R
+import com.example.catwork.data.entity.DayRecordEntity
 import com.example.catwork.databinding.FragmentCalendarBinding
 import com.example.catwork.ext.*
 import org.koin.android.ext.android.inject
@@ -60,7 +61,7 @@ class CalendarFragment : ScopeFragment(), CalendarContract.View {
             binding.yearTextView.text = "${selectedYear}년"
             binding.monthTextView.text = "${selectedMonth}월"
 
-            presenter.fetchCalendarRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+            presenter.fetchCalendarRecord(selectedYear, selectedMonth)
         }
 
         nextMonthDayButton.setOnClickListener {
@@ -72,7 +73,7 @@ class CalendarFragment : ScopeFragment(), CalendarContract.View {
             binding.yearTextView.text = "${selectedYear}년"
             binding.monthTextView.text = "${selectedMonth}월"
 
-            presenter.fetchCalendarRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+            presenter.fetchCalendarRecord(selectedYear, selectedMonth)
         }
 
         recyclerView.apply {
@@ -95,12 +96,14 @@ class CalendarFragment : ScopeFragment(), CalendarContract.View {
         binding.errorDescriptionTextView.text = message
     }
 
-    override fun showCalendarRecord() {
+    override fun showCalendarRecord(dayRecordList: ArrayList<Int>) {
         binding.recyclerView.toVisible()
         binding.errorDescriptionTextView.toGone()
+
         (binding.recyclerView.adapter as CalendarAdapter).run {
             setDayList(
                 getDayList(),
+                dayRecordList,
                 dayCellClickListener = {
 
                 }

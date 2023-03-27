@@ -2,7 +2,6 @@ package com.example.catwork.presentation.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.example.catwork.R
 import com.example.catwork.data.entity.DayRecordEntity
 import com.example.catwork.databinding.FragmentHomeBinding
 import com.example.catwork.data.entity.ToDoEntity
-import com.example.catwork.domain.Emoji
 import com.example.catwork.ext.*
 import com.example.catwork.presentation.home.dialog.AddToDoDialog
 import org.koin.android.ext.android.inject
@@ -103,6 +101,7 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
             binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
 
             presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+            presenter.fetchDayRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
 
         tomorrowDayButton.setOnClickListener {
@@ -115,6 +114,7 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
             binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
 
             presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+            presenter.fetchDayRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
 
         recordButton.setOnClickListener {
@@ -135,6 +135,7 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
             binding.dateTextView.text = "${selectedMonth}월 ${selectedDay}일"
 
             presenter.fetchToDoList(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
+            presenter.fetchDayRecord(getSelectedDateString(selectedYear, selectedMonth, selectedDay))
         }
 
         DatePickerDialog(requireContext(), dateSetListener, selectedYear, selectedMonth-1, selectedDay).show()
