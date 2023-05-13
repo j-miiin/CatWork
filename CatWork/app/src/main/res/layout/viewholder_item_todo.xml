@@ -9,9 +9,11 @@
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="10dp"
+        android:background="@drawable/todo_checkbox_selector"
+        android:button="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/toDoText"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +23,7 @@
         android:id="@+id/toDoText"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:gravity="center|left"
         android:textColor="@color/primaryTextColor"
