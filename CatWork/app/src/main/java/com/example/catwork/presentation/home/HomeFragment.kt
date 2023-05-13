@@ -118,7 +118,7 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
         }
 
         recordButton.setOnClickListener {
-            feeling = (feeling + 1) % 7
+            feeling = (feeling + 1) % 6
             changeFeelingState()
             val updateDayRecordEntity = dayRecordEntity.copy(feeling = feeling)
             presenter.updateDayRecord(updateDayRecordEntity)
@@ -147,9 +147,8 @@ class HomeFragment: ScopeFragment(), HomeContract.View {
             2 -> binding.recordButton.setImageResource(R.drawable.ic_good)
             3 -> binding.recordButton.setImageResource(R.drawable.ic_soso)
             4 -> binding.recordButton.setImageResource(R.drawable.ic_bad)
-            5 -> binding.recordButton.setImageResource(R.drawable.ic_sad)
-            6 -> binding.recordButton.setImageResource(R.drawable.ic_tired)
-            7 -> binding.recordButton.setImageResource(R.drawable.ic_sick)
+            5 -> binding.recordButton.setImageResource(R.drawable.ic_tired)
+            6 -> binding.recordButton.setImageResource(R.drawable.ic_sick)
             0 -> binding.recordButton.setImageResource(R.drawable.ic_none)
         }
     }

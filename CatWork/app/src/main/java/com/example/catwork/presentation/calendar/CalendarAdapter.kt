@@ -34,9 +34,8 @@ class CalendarAdapter() : RecyclerView.Adapter<CalendarAdapter.CalendarCellViewH
                 2 -> binding.recordButton.setImageResource(R.drawable.ic_good)
                 3 -> binding.recordButton.setImageResource(R.drawable.ic_soso)
                 4 -> binding.recordButton.setImageResource(R.drawable.ic_bad)
-                5 -> binding.recordButton.setImageResource(R.drawable.ic_sad)
-                6 -> binding.recordButton.setImageResource(R.drawable.ic_tired)
-                7 -> binding.recordButton.setImageResource(R.drawable.ic_sick)
+                5 -> binding.recordButton.setImageResource(R.drawable.ic_tired)
+                6 -> binding.recordButton.setImageResource(R.drawable.ic_sick)
                 0 -> binding.recordButton.setImageResource(R.drawable.ic_none)
             }
         }
